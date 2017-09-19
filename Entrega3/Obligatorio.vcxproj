@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CasoDePrueba.cpp" />
+    <ClCompile Include="CPBinaryHeap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PrioridadA.cpp" />
     <ClCompile Include="PrioridadB.cpp" />
@@ -107,6 +108,7 @@
   <ItemGroup>
     <ClInclude Include="CasoDePrueba.h" />
     <ClInclude Include="ColaPrioridadExtendida.h" />
+    <ClInclude Include="CPBinaryHeap.h" />
     <ClInclude Include="Prioridad.h" />
     <ClInclude Include="PrioridadA.h" />
     <ClInclude Include="PrioridadB.h" />

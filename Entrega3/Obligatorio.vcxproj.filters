@@ -33,6 +33,9 @@
     <ClCompile Include="SistemaTemplates.cpp">
       <Filter>Implementacion</Filter>
     </ClCompile>
+    <ClCompile Include="CPBinaryHeap.cpp">
+      <Filter>TADs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tablero.h">
@@ -54,6 +57,9 @@
       <Filter>Implementacion\Prioridad</Filter>
     </ClInclude>
     <ClInclude Include="ColaPrioridadExtendida.h">
+      <Filter>TADs</Filter>
+    </ClInclude>
+    <ClInclude Include="CPBinaryHeap.h">
       <Filter>TADs</Filter>
     </ClInclude>
   </ItemGroup>
