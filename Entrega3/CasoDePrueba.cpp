@@ -1,5 +1,6 @@
 ﻿#include "CasoDePrueba.h"
 #include "CadenaFuncionHash.h"
+#include "Utils.h"
 
 CasoDePrueba::CasoDePrueba(Puntero<Sistema>(*inicializar)())
 {
@@ -20,7 +21,11 @@ Cadena CasoDePrueba::GetNombre()const
 
 void CasoDePrueba::CorrerPruebaConcreta()
 {
-	IniciarSeccion("Cola de Prioridad Extendida");
+	IniciarSeccion("Probar Son Iguales Arrays");
+	ProbarComparadorArrays();
+	CerrarSeccion();
+
+	/*IniciarSeccion("Cola de Prioridad Extendida");
 	PruebaColaPrioridadExtendida();
 	CerrarSeccion();
 
@@ -43,7 +48,7 @@ void CasoDePrueba::CorrerPruebaConcreta()
 	PruebaTablero4(prioridadB);
 	PruebaTablero5(prioridadB);
 	PruebaTablero6(prioridadB);
-	CerrarSeccion();
+	CerrarSeccion();*/
 
 }
 
@@ -355,6 +360,36 @@ bool CasoDePrueba::Pertenece(const T& dato, Iterador<T> iterador, T& encontrado)
 		}
 	}
 	return false;
+}
+void CasoDePrueba::ProbarComparadorArrays()
+{
+	bool ignoreOk = ignorarOK;
+	ignorarOK = false;
+	Array<int> arr1(0);
+	Array<int> arr2(0);
+
+	Utils util =  Utils();
+
+	Verificar(util.CompararArrays(arr1, arr2) ? OK : ERROR , OK, "Los arrays son iguales");
+
+	arr1 = Array<int>(3);
+	arr2 = Array<int>(3);
+
+	arr1[0] = 1; arr1[1] = 1; arr1[2] = 1;
+	arr2[0] = 1; arr2[1] = 1; arr2[2] = 1;
+	
+	Verificar(util.CompararArrays(arr1, arr2) ? OK : ERROR, OK, "Los arrays son iguales");
+	
+	arr2[1] = 0;	
+	Verificar(util.CompararArrays(arr1, arr2) ? ERROR : OK, OK, "Los arrays son distintos");
+
+	Array<int> arr3(4,1);
+	Verificar(util.CompararArrays(arr1, arr3) ? ERROR : OK, OK, "Los arrays son distintos");
+
+	arr1[2] = 2;
+	arr2[1] = 1;
+	Verificar(util.CompararArrays(arr1, arr2) ? ERROR : OK, OK, "Los arrays son distintos");
+	ignorarOK = ignoreOk;
 }
 
 void CasoDePrueba::PruebaTablero1(Puntero<Prioridad> prioridad)

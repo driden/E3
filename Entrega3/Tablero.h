@@ -16,8 +16,8 @@ public :
 	Tablero(Matriz<int> bloques, Puntero<Prioridad> p);
 	
 	//Retorna el calculo de prioridad en base a la prioridad recibida en el constructor.
-	nat CalcularPrioridad();
-	
+	nat CalcularPrioridad();	
+
 	//Decide si esta posicion es igual a otra.
 	bool operator==(const Tablero& t ) const;
 		
@@ -31,6 +31,8 @@ public :
 	Cadena Imprimir() const;
 private:
 	//Atributos que considre necesarios para resolver el problema. 
+	Matriz<int> tablero;
+	Puntero<Prioridad> pPrioridad;	
 };
 
 #endif

@@ -10,8 +10,11 @@
     <Filter Include="TADs">
       <UniqueIdentifier>{a8ff116a-5b89-496d-991e-690e1ce9a61d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ColaPrioridad">
+    <Filter Include="ColaPrioridad_Vieja">
       <UniqueIdentifier>{0c2a6438-2ae6-49ae-a523-02f55b9fd49a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementacion\Utils">
+      <UniqueIdentifier>{217e20ed-5d2f-40f0-b3ba-43255bb41b14}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,22 +43,25 @@
       <Filter>TADs</Filter>
     </ClCompile>
     <ClCompile Include="ColaPrioridadLista.cpp">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClCompile>
     <ClCompile Include="ComparacionNodoPQueue.cpp">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClCompile>
     <ClCompile Include="ListaEncadenadaImp.cpp">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClCompile>
     <ClCompile Include="ListaEncadenadaIteracion.cpp">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClCompile>
     <ClCompile Include="NodoPQueue.cpp">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClCompile>
     <ClCompile Include="ColaIteracion.cpp">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Implementacion\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,31 +90,34 @@
       <Filter>TADs</Filter>
     </ClInclude>
     <ClInclude Include="ColaIteracion.h">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClInclude>
     <ClInclude Include="ColaPrioridad.h">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClInclude>
     <ClInclude Include="ColaPrioridadLista.h">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClInclude>
     <ClInclude Include="ComparacionNodoPQueue.h">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClInclude>
     <ClInclude Include="ListaEncadenadaImp.h">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClInclude>
     <ClInclude Include="ListaEncadenadaIteracion.h">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClInclude>
     <ClInclude Include="NodoPQueue.h">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClInclude>
     <ClInclude Include="ListaOrd.h">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
     </ClInclude>
     <ClInclude Include="NodoLista.h">
-      <Filter>ColaPrioridad</Filter>
+      <Filter>ColaPrioridad_Vieja</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Implementacion\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

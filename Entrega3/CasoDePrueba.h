@@ -46,7 +46,7 @@ private:
 	Cadena ObtenerTexto(Cadena) const;
 	Cadena ObtenerTexto(Puntero<Tablero>) const;
 	template <class T>
-	bool Pertenece(const T& dato, Iterador<T> iterador, T& encontrado) const;
+	bool Pertenece(const T& dato, Iterador<T> iterador, T& encontrado) const;	
 
 	void PruebaTablero1(Puntero<Prioridad> p);
 	void PruebaTablero2(Puntero<Prioridad> p);
@@ -55,5 +55,7 @@ private:
 	void PruebaTablero5(Puntero<Prioridad> p);
 	void PruebaTablero6(Puntero<Prioridad> p);
 	void PruebaColaPrioridadExtendida();
+
+	void ProbarComparadorArrays();
 };
 
