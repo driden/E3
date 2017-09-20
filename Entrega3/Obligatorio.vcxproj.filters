@@ -10,6 +10,9 @@
     <Filter Include="TADs">
       <UniqueIdentifier>{a8ff116a-5b89-496d-991e-690e1ce9a61d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ColaPrioridad">
+      <UniqueIdentifier>{0c2a6438-2ae6-49ae-a523-02f55b9fd49a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +39,24 @@
     <ClCompile Include="CPBinaryHeap.cpp">
       <Filter>TADs</Filter>
     </ClCompile>
+    <ClCompile Include="ColaPrioridadLista.cpp">
+      <Filter>ColaPrioridad</Filter>
+    </ClCompile>
+    <ClCompile Include="ComparacionNodoPQueue.cpp">
+      <Filter>ColaPrioridad</Filter>
+    </ClCompile>
+    <ClCompile Include="ListaEncadenadaImp.cpp">
+      <Filter>ColaPrioridad</Filter>
+    </ClCompile>
+    <ClCompile Include="ListaEncadenadaIteracion.cpp">
+      <Filter>ColaPrioridad</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoPQueue.cpp">
+      <Filter>ColaPrioridad</Filter>
+    </ClCompile>
+    <ClCompile Include="ColaIteracion.cpp">
+      <Filter>ColaPrioridad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tablero.h">
@@ -61,6 +82,33 @@
     </ClInclude>
     <ClInclude Include="CPBinaryHeap.h">
       <Filter>TADs</Filter>
+    </ClInclude>
+    <ClInclude Include="ColaIteracion.h">
+      <Filter>ColaPrioridad</Filter>
+    </ClInclude>
+    <ClInclude Include="ColaPrioridad.h">
+      <Filter>ColaPrioridad</Filter>
+    </ClInclude>
+    <ClInclude Include="ColaPrioridadLista.h">
+      <Filter>ColaPrioridad</Filter>
+    </ClInclude>
+    <ClInclude Include="ComparacionNodoPQueue.h">
+      <Filter>ColaPrioridad</Filter>
+    </ClInclude>
+    <ClInclude Include="ListaEncadenadaImp.h">
+      <Filter>ColaPrioridad</Filter>
+    </ClInclude>
+    <ClInclude Include="ListaEncadenadaIteracion.h">
+      <Filter>ColaPrioridad</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoPQueue.h">
+      <Filter>ColaPrioridad</Filter>
+    </ClInclude>
+    <ClInclude Include="ListaOrd.h">
+      <Filter>ColaPrioridad</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoLista.h">
+      <Filter>ColaPrioridad</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

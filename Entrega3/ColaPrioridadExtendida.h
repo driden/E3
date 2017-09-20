@@ -5,6 +5,7 @@
 
 #include "Iterable.h"
 #include "Puntero.h"
+#include "Tupla.h"
 
 typedef unsigned int nat;
 
