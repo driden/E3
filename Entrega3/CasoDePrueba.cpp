@@ -2,6 +2,9 @@
 #include "CadenaFuncionHash.h"
 #include "Utils.h"
 
+#include <string.h>
+using namespace std;
+
 CasoDePrueba::CasoDePrueba(Puntero<Sistema>(*inicializar)())
 {
 	this->inicializar = inicializar;
@@ -21,11 +24,11 @@ Cadena CasoDePrueba::GetNombre()const
 
 void CasoDePrueba::CorrerPruebaConcreta()
 {
-	IniciarSeccion("Probar Son Iguales Arrays");
+	IniciarSeccion("Son Iguales Arrays");
 	ProbarComparadorArrays();
 	CerrarSeccion();
-
-	/*IniciarSeccion("Cola de Prioridad Extendida");
+	/*
+	IniciarSeccion("Cola de Prioridad Extendida");
 	PruebaColaPrioridadExtendida();
 	CerrarSeccion();
 
@@ -48,8 +51,8 @@ void CasoDePrueba::CorrerPruebaConcreta()
 	PruebaTablero4(prioridadB);
 	PruebaTablero5(prioridadB);
 	PruebaTablero6(prioridadB);
-	CerrarSeccion();*/
-
+	CerrarSeccion();
+*/
 }
 
 void CasoDePrueba::Verificar(TipoRetorno obtenido, TipoRetorno esperado, Cadena comentario)
@@ -361,36 +364,6 @@ bool CasoDePrueba::Pertenece(const T& dato, Iterador<T> iterador, T& encontrado)
 	}
 	return false;
 }
-void CasoDePrueba::ProbarComparadorArrays()
-{
-	bool ignoreOk = ignorarOK;
-	ignorarOK = false;
-	Array<int> arr1(0);
-	Array<int> arr2(0);
-
-	Utils util =  Utils();
-
-	Verificar(util.CompararArrays(arr1, arr2) ? OK : ERROR , OK, "Los arrays son iguales");
-
-	arr1 = Array<int>(3);
-	arr2 = Array<int>(3);
-
-	arr1[0] = 1; arr1[1] = 1; arr1[2] = 1;
-	arr2[0] = 1; arr2[1] = 1; arr2[2] = 1;
-	
-	Verificar(util.CompararArrays(arr1, arr2) ? OK : ERROR, OK, "Los arrays son iguales");
-	
-	arr2[1] = 0;	
-	Verificar(util.CompararArrays(arr1, arr2) ? ERROR : OK, OK, "Los arrays son distintos");
-
-	Array<int> arr3(4,1);
-	Verificar(util.CompararArrays(arr1, arr3) ? ERROR : OK, OK, "Los arrays son distintos");
-
-	arr1[2] = 2;
-	arr2[1] = 1;
-	Verificar(util.CompararArrays(arr1, arr2) ? ERROR : OK, OK, "Los arrays son distintos");
-	ignorarOK = ignoreOk;
-}
 
 void CasoDePrueba::PruebaTablero1(Puntero<Prioridad> prioridad)
 {
@@ -671,7 +644,7 @@ void CasoDePrueba::PruebaColaPrioridadExtendida()
 		foreach(auto tupla, elementos.ObtenerIterador())
 		{
 			Verificar(cola->Pertenece(tupla.Dato1), true, Cadena("{0} esta definida.").DarFormato(tupla.Dato1));
-			Verificar(cola->ObtenerElementoYPrioridad(tupla.Dato1), tupla, Cadena("La prioridad del elemento: {0} es {1}").DarFormato(tupla.Dato1,tupla.Dato2+""));//
+			Verificar(cola->ObtenerElementoYPrioridad(tupla.Dato1), tupla, Cadena("Se obtuvo correctamente el elemento {0} y su prioridad").DarFormato(tupla.Dato1));//
 		}
 
 		VerificarConjuntos(cola->ObtenerIterador(), elementos.ObtenerIterador(), "Se obtuvo {0} correctamente", "Se esperaba {0}", "No se esperaba {0}");//
@@ -681,5 +654,36 @@ void CasoDePrueba::PruebaColaPrioridadExtendida()
 		Verificar(cola->EstaVacia(), true, "La cola está vacía.");
 		Verificar(cola->Largo() == 0, true, "El largo de la cola es 0.");
 		VerificarConjuntos(cola->ObtenerIterador(), elementos.ObtenerIterador(), "Se obtuvo {0} correctamente", "Se esperaba {0}", "No se esperaba {0}");//
+	}
+
+	void CasoDePrueba::ProbarComparadorArrays()
+	{
+		bool ignoreOk = ignorarOK;
+		ignorarOK = false;
+		Array<int> arr1(0);
+		Array<int> arr2(0);
+	
+		Utils util =  Utils();
+	
+		Verificar(util.CompararArrays(arr1, arr2) ? OK : ERROR , OK, "Los arrays son iguales");
+	
+		arr1 = Array<int>(3);
+		arr2 = Array<int>(3);
+	
+		arr1[0] = 1; arr1[1] = 1; arr1[2] = 1;
+		arr2[0] = 1; arr2[1] = 1; arr2[2] = 1;
+		
+		Verificar(util.CompararArrays(arr1, arr2) ? OK : ERROR, OK, "Los arrays son iguales");
+		
+		arr2[1] = 0;	
+		Verificar(util.CompararArrays(arr1, arr2) ? ERROR : OK, OK, "Los arrays son distintos");
+	
+		Array<int> arr3(4,1);
+		Verificar(util.CompararArrays(arr1, arr3) ? ERROR : OK, OK, "Los arrays son distintos");
+	
+		arr1[2] = 2;
+		arr2[1] = 1;
+		Verificar(util.CompararArrays(arr1, arr2) ? ERROR : OK, OK, "Los arrays son distintos");
+		ignorarOK = ignoreOk;
 	}
 }

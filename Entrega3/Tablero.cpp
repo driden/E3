@@ -16,6 +16,7 @@ nat Tablero::CalcularPrioridad()
 	return pPrioridad->CalcularPrioridad(*this);
 }
 
+nat Tablero::ObtenerCantidadDeMovimientos(){return 0;}
 
 bool Tablero::operator==(const Tablero& t) const
 {
