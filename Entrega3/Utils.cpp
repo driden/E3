@@ -26,5 +26,11 @@ bool Utils::CompararArrays(const Array<int> &arr1, const Array<int> &arr2) const
 
 	return sonIguales;
 }
-
+template <class T>
+void Utils::Swap(Array<T> &arr, nat pos1, nat pos2)
+{
+	T aux = arr[pos1];
+	arr[pos1] = arr[pos2];
+	arr[pos2] = aux;
+}
 #endif

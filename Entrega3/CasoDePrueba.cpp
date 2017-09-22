@@ -27,7 +27,7 @@ void CasoDePrueba::CorrerPruebaConcreta()
 	IniciarSeccion("Son Iguales Arrays");
 	ProbarComparadorArrays();
 	CerrarSeccion();
-	/*
+	
 	IniciarSeccion("Cola de Prioridad Extendida");
 	PruebaColaPrioridadExtendida();
 	CerrarSeccion();
@@ -52,7 +52,7 @@ void CasoDePrueba::CorrerPruebaConcreta()
 	PruebaTablero5(prioridadB);
 	PruebaTablero6(prioridadB);
 	CerrarSeccion();
-*/
+
 }
 
 void CasoDePrueba::Verificar(TipoRetorno obtenido, TipoRetorno esperado, Cadena comentario)
@@ -596,10 +596,10 @@ void CasoDePrueba::PruebaTablero6(Puntero<Prioridad> prioridad)
 }
 
 void CasoDePrueba::PruebaColaPrioridadExtendida()
-{	
+{
 	Puntero<Sistema> interfaz = InicializarSistema();
-	Puntero<ColaPrioridadExtendida<Cadena, nat>> cola = interfaz->CrearColaPrioridadExtendida<Cadena,nat>(Comparador<Cadena>::Default, Comparador<nat>::Default, new CadenaFuncionHash());
-	
+	Puntero<ColaPrioridadExtendida<Cadena, nat>> cola = interfaz->CrearColaPrioridadExtendida<Cadena, nat>(Comparador<Cadena>::Default, Comparador<nat>::Default, new CadenaFuncionHash());
+
 	Verificar(cola != NULL, true, "La cola no debe ser nula.");
 	if (cola != NULL) {
 		Verificar(cola->EstaLlena(), false, "La cola no está llena.");
@@ -608,7 +608,7 @@ void CasoDePrueba::PruebaColaPrioridadExtendida()
 		Cadena elemento1 = "elemento1";
 		nat prioridad1 = 1;
 
-		cola->InsertarConPrioridad(elemento1,1);
+		cola->InsertarConPrioridad(elemento1, 1);
 		Verificar(cola->Largo() == 1, true, "El largo de la cola es 1.");
 		Verificar(cola->EstaVacia(), false, "La cola no está vacía.");
 		Verificar(cola->Pertenece(elemento1), true, "elemento1 pertenece a la cola.");
@@ -621,8 +621,8 @@ void CasoDePrueba::PruebaColaPrioridadExtendida()
 		cola->EliminarElementoMayorPrioridad();
 		Verificar(cola->Largo() == 0, true, "El largo de la cola es 0.");
 		Verificar(cola->EstaVacia(), true, "La cola está vacía.");
-		
-	
+
+
 		nat cant = 8;
 		Array<Tupla<Cadena, nat>> elementos = Array<Tupla<Cadena, nat>>(cant);
 		elementos[0] = Tupla<Cadena, nat>("elemento0", 0);
@@ -655,6 +655,7 @@ void CasoDePrueba::PruebaColaPrioridadExtendida()
 		Verificar(cola->Largo() == 0, true, "El largo de la cola es 0.");
 		VerificarConjuntos(cola->ObtenerIterador(), elementos.ObtenerIterador(), "Se obtuvo {0} correctamente", "Se esperaba {0}", "No se esperaba {0}");//
 	}
+}
 
 	void CasoDePrueba::ProbarComparadorArrays()
 	{
@@ -686,4 +687,5 @@ void CasoDePrueba::PruebaColaPrioridadExtendida()
 		Verificar(util.CompararArrays(arr1, arr2) ? ERROR : OK, OK, "Los arrays son distintos");
 		ignorarOK = ignoreOk;
 	}
-}
+
+
