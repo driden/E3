@@ -1,11 +1,9 @@
-﻿#ifndef CP_BINARY_HEAP_H
-#define CP_BINARY_HEAP_H
+﻿#pragma once
 
-#pragma once
 #include "ColaPrioridadExtendida.h"
 #include "Array.h"
-#include "Tupla.h"
 #include "FuncionHash.h"
+#include "Utils.h"
 
 template <class T, class P>
 class CPBinaryHeap : public ColaPrioridadExtendida<T, P>
@@ -13,12 +11,28 @@ class CPBinaryHeap : public ColaPrioridadExtendida<T, P>
 private:
 	nat tope;
 	Array<Tupla<T,P>> heap;
-	const Comparador<T> &compElementos;
-	const Comparador<P> &compPrioridades;
+	Array<Tupla<T, P>> copia;
+	Comparador<T> compElementos;
+	Comparador<P> compPrioridades;
 	Puntero<FuncionHash<T>> fHash;
+
+	Utils utils;
+
+	// PRE: -
+	// POS: Devuelve la posicion en el heap de e, o 0 si no esta
+	nat IndexOf(const T& e) const;
+	
+	// PRE: Existen elementos en el heap en pos1 y pos2
+	// POS: El elemento que estaba en pos1 ahora esta en pos2 y viceversa
+	void SwapHeap(const nat pos1, const nat pos2);
+
+	// PRE: Existe un elemento en la posicion index
+	// POS: Se elimina el elemento en la posicion index del heap
+	void EliminarPosicion(nat index);
 public:
-	~CPBinaryHeap() {}
+	~CPBinaryHeap() { fHash = nullptr; }
 	CPBinaryHeap(const Comparador<T>& compElementos, const Comparador<P>& compPrioridades, Puntero<FuncionHash<T>> fHashElementos);
+	
 	// PRE: -
 	// POS: Inserta el elemento e con prioridad p
 	void InsertarConPrioridad(const T& e, const P& p) override;
@@ -30,7 +44,6 @@ public:
 	// PRE: La cola no está vacía
 	// POS: Retorna el elemento de mayor prioridad en la cola sin eliminarlo
 	const T& ObtenerElementoMayorPrioridad() const override;
-	nat IndexOf(const T& e);
 
 	// PRE: El elemento e pertenece a la cola.
 	// POS: Retorna una tupla que contiene al elemento e y su prioridad.
@@ -42,7 +55,7 @@ public:
 
 	// PRE: -
 	// POS: Retorna true si y solo si el elemento e pertenece a la cola.
-	bool Pertenece(const T& e) const override;
+	bool Pertenece(const T& e) const override;	
 
 	// PRE: El elemento e pertenece a la cola.
 	// POS: El elemento e tiene una nueva prioridad p.
@@ -70,9 +83,7 @@ public:
 
 	// Retorna un nuevo iterador sobre la estructura
 	// Postcondición: El iterador se encuentra reiniciado
-	Iterador<T> ObtenerIterador() const override;
+	Iterador<Tupla<T,P>> ObtenerIterador() const override;
 
 };
 #include "CPBinaryHeap.cpp"
-
-#endif

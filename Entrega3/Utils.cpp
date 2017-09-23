@@ -33,4 +33,12 @@ void Utils::Swap(Array<T> &arr, nat pos1, nat pos2)
 	arr[pos1] = arr[pos2];
 	arr[pos2] = aux;
 }
+
+template <class T, class P>
+void Utils::Swap(Array<Tupla<T,P>> &arr, nat pos1, nat pos2)
+{
+	Tupla<T,P> aux = arr[pos1];
+	arr[pos1] = arr[pos2];
+	arr[pos2] = aux;
+}
 #endif

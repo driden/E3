@@ -5,6 +5,7 @@
 #include "Cadena.h"
 #include "Iterador.h"
 #include "Prioridad.h"
+#include "Tupla.h"
 
 typedef unsigned int nat;
 
@@ -23,7 +24,11 @@ public :
 	
 	//Decide si esta posicion es igual a otra.
 	bool operator==(const Tablero& t ) const;
-		
+
+	// PRE: -
+	// POS: Devuelve la posicion donde esta el vacio
+	Tupla<nat, nat> PosicionVacio() const;
+
 	//Retorna un iterador de las posiciones vecinas a esta. 
 	Iterador<Tablero> Vecinos();
 	
@@ -36,7 +41,7 @@ private:
 	//Atributos que considre necesarios para resolver el problema. 
 	Matriz<int> tablero;
 	Puntero<Prioridad> pPrioridad;	
-
+	nat cantidadMovimientos;
 };
 
 #endif

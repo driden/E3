@@ -8,6 +8,7 @@ Tablero::Tablero(Matriz<int> bloques, Puntero<Prioridad> p)
 {
 	tablero = bloques;
 	pPrioridad = p;
+	cantidadMovimientos = 0;
 }
 
 nat Tablero::CalcularPrioridad()
@@ -16,7 +17,7 @@ nat Tablero::CalcularPrioridad()
 	return pPrioridad->CalcularPrioridad(*this);
 }
 
-nat Tablero::ObtenerCantidadDeMovimientos(){return 0;}
+nat Tablero::ObtenerCantidadDeMovimientos() { return cantidadMovimientos; }
 
 bool Tablero::operator==(const Tablero& t) const
 {
@@ -42,6 +43,23 @@ bool Tablero::operator==(const Tablero& t) const
 	return iguales;
 }
 
+Tupla<nat,nat> Tablero::PosicionVacio() const
+{
+	nat x, y;
+	bool salir = false;
+	for (nat i =0 ; i < this->tablero.Largo && !salir; i++)
+	{
+		for (nat j = 0 ; j < tablero.Ancho && !salir; j++)
+		{
+			if (tablero[i][j] == 0)
+			{
+				x = i;
+				y = j;
+			}
+		}
+	}
+	return Tupla<nat, nat>(x, y);
+}
 
 Iterador<Tablero> Tablero::Vecinos()
 {
@@ -52,8 +70,7 @@ Iterador<Tablero> Tablero::Vecinos()
 
 Matriz<int> Tablero::ObtenerTablero() const
 {
-	// Implementar.
-	return Matriz<int>();
+	return tablero;
 }
 
 Cadena Tablero::Imprimir() const
