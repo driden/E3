@@ -15,6 +15,8 @@ public :
 
 	//Construye un tablero dada una matriz de NxN bloques y la prioridad p. 
 	Tablero(Matriz<int> bloques, Puntero<Prioridad> p);
+
+	Tablero(Matriz<int> bloques, Puntero<Prioridad> p, nat cantidadDeMovimientos);
 	
 	//Retorna el calculo de prioridad en base a la prioridad recibida en el constructor.
 	nat CalcularPrioridad();
@@ -28,6 +30,9 @@ public :
 	// PRE: -
 	// POS: Devuelve la posicion donde esta el vacio
 	Tupla<nat, nat> PosicionVacio() const;
+	bool EstaEnRango(Tupla<nat, nat> pos);
+	Array<Tupla<nat, nat>> FiltrarVecinosEnRango(Array<Tupla<nat, nat>> vecinos);
+	Array<Tablero> CrearListaDeTableros(Array<Tupla<nat, nat>> jugadasPosibles, Tupla<nat, nat> posVacio);
 
 	//Retorna un iterador de las posiciones vecinas a esta. 
 	Iterador<Tablero> Vecinos();

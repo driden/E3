@@ -13,6 +13,9 @@ public:
 
 	template <class T,class P>
 	void Swap(Array<Tupla<T,P>> &arr, nat pos1, nat pos2);
+	
+	template <class T>
+	Array<T> Filter(const Array<T> &arr, bool(*cumple)(T));
 };
 
 

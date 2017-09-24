@@ -41,4 +41,33 @@ void Utils::Swap(Array<Tupla<T,P>> &arr, nat pos1, nat pos2)
 	arr[pos1] = arr[pos2];
 	arr[pos2] = aux;
 }
+
+template <class T>
+Array<T> Utils::Filter(const Array<T>& arr, bool(*cumple)(T))
+{
+	nat cantCumple = 0;
+	Array<bool> arrCumplen(arr.Largo, false);
+
+	for (nat i = 0; i < arr.Largo; i++)
+	{
+		if (cumple(arr[i]))
+		{
+			arrCumplen[i] = true;
+			cantCumple++;
+		}			
+	}
+
+	Array<T> ret(cantCumple);
+	nat c = 0;
+	for(nat i =0; i < arrCumplen.Largo;i++)
+	{
+		if(arrCumplen[i])
+		{
+			ret[c] = arr[i];
+			c++;
+		}
+
+	}
+	return ret;
+}
 #endif
