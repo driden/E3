@@ -33,6 +33,8 @@ public:
 
 private:
 	//Atributos necesarios para cumplir con las operaciones.
+	Tablero tablero;
+	Puntero<Prioridad> pPrioridad;
 };
 
 #include "SistemaTemplates.cpp"

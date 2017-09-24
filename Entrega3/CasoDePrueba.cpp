@@ -28,9 +28,13 @@ void CasoDePrueba::CorrerPruebaConcreta()
 	ProbarComparadorArrays();
 	CerrarSeccion();
 	
-	IniciarSeccion("Cola de Prioridad Extendida");
-	PruebaColaPrioridadExtendida();
-	CerrarSeccion();
+	//IniciarSeccion("Movimientos");
+	//ProbarMovimientos1();
+	//CerrarSeccion();
+
+	//IniciarSeccion("Cola de Prioridad Extendida");
+	//PruebaColaPrioridadExtendida();
+	//CerrarSeccion();
 
 	Puntero<Prioridad> prioridadA = new PrioridadA();
 	Puntero<Prioridad> prioridadB = new PrioridadB();
@@ -44,14 +48,14 @@ void CasoDePrueba::CorrerPruebaConcreta()
 	PruebaTablero6(prioridadA);
 	CerrarSeccion();
 
-	IniciarSeccion("Prioridad B");
-	PruebaTablero1(prioridadB);
-	PruebaTablero2(prioridadB);
-	PruebaTablero3(prioridadB);
-	PruebaTablero4(prioridadB);
-	PruebaTablero5(prioridadB);
-	PruebaTablero6(prioridadB);
-	CerrarSeccion();
+	//IniciarSeccion("Prioridad B");
+	//PruebaTablero1(prioridadB);
+	//PruebaTablero2(prioridadB);
+	//PruebaTablero3(prioridadB);
+	//PruebaTablero4(prioridadB);
+	//PruebaTablero5(prioridadB);
+	//PruebaTablero6(prioridadB);
+	//CerrarSeccion();
 
 }
 
@@ -241,6 +245,11 @@ Cadena CasoDePrueba::ObtenerTexto(Puntero<Tablero> tablero) const
 	return "Tablero vacio";
 }
 
+Cadena CasoDePrueba::ObtenerTexto(Tablero tablero) const
+{
+	return tablero.Imprimir();
+}
+
 Cadena CasoDePrueba::ObtenerTexto(nat n) const
 {
 	switch (n)
@@ -293,6 +302,11 @@ bool CasoDePrueba::SonIguales(const bool obtenido, const bool esperado) const
 }
 
 bool CasoDePrueba::SonIguales(const Puntero<Tablero> obtenido, const Puntero<Tablero> esperado) const
+{
+	return obtenido == esperado;
+}
+
+bool CasoDePrueba::SonIguales(Tablero obtenido, Tablero esperado) const
 {
 	return obtenido == esperado;
 }
@@ -685,6 +699,57 @@ void CasoDePrueba::PruebaColaPrioridadExtendida()
 		arr1[2] = 2;
 		arr2[1] = 1;
 		Verificar(util.CompararArrays(arr1, arr2) ? ERROR : OK, OK, "Los arrays son distintos");
+		ignorarOK = ignoreOk;
+	}
+
+	void CasoDePrueba::ProbarMovimientos1()
+	{
+		bool ignoreOk = ignorarOK;
+		ignorarOK = false;
+
+		Matriz<int> tablero(3);
+
+		tablero[0][0] = 8;
+		tablero[0][1] = 1;
+		tablero[0][2] = 3;
+
+		tablero[1][0] = 4;
+		tablero[1][1] = 0;
+		tablero[1][2] = 2;
+
+		tablero[2][0] = 7;
+		tablero[2][1] = 6;
+		tablero[2][2] = 5;
+
+		Tablero t(tablero, nullptr);
+
+		Array<Tablero> esperados(4);
+
+		Matriz<int> jugada1 = t.Copiar();
+		jugada1[0][1] = 0;
+		jugada1[1][1] = 1;
+
+		Matriz<int> jugada2 = t.Copiar();
+		jugada2[1][0] = 0;
+		jugada2[1][1] = 4;
+
+		Matriz<int> jugada3 = t.Copiar();
+		jugada3[1][2] = 0;
+		jugada3[1][1] = 2;
+
+		Matriz<int> jugada4 = t.Copiar();
+		jugada4[2][1] = 0;
+		jugada4[1][1] = 6;
+
+		esperados[0] = Tablero (jugada1,nullptr);
+		esperados[1] = Tablero(jugada2, nullptr);
+		esperados[2] = Tablero(jugada3, nullptr);
+		esperados[3] = Tablero(jugada4, nullptr);
+
+		Iterador<Tablero> jugadas = t.Vecinos();
+
+		VerificarConjuntos(jugadas,esperados.ObtenerIterador(),"Se obtuvo {0} correctamente", "Se esperaba {0}", "No se esperaba {0}");
+		
 		ignorarOK = ignoreOk;
 	}
 

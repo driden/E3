@@ -19,8 +19,8 @@ Array<int> PrioridadA::AplanarTablero(const Tablero& t) const
 		itMatriz.Avanzar();
 
 
-		Array<int>::Copiar(itMatriz.ElementoActual(), arrayTablero, desde);
-		desde += linea.Largo + 1;
+		Array<int>::Copiar(linea, arrayTablero, desde);
+		desde += linea.Largo;
 	}
 	return arrayTablero;
 }

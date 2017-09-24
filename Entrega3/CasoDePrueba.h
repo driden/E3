@@ -38,6 +38,7 @@ private:
 	bool SonIguales(const Matriz<int>& obtenido, const Matriz<int>& esperado) const;
 	bool SonVecinos(const Matriz<int>& obtenido, const Matriz<int>& esperado) const;
 	bool SonIguales(const Puntero<Tablero> obtenido, const Puntero<Tablero> esperado) const;
+	bool SonIguales(Tablero obtenido, Tablero esperado) const;
 	template <class T>
 	Cadena ObtenerTexto(Iterador<T> it) const;
 	Cadena ObtenerTexto(const Tupla<nat, nat>& t) const;
@@ -45,6 +46,7 @@ private:
 	Cadena ObtenerTexto(nat n) const;
 	Cadena ObtenerTexto(Cadena) const;
 	Cadena ObtenerTexto(Puntero<Tablero>) const;
+	Cadena ObtenerTexto(Tablero tablero) const;
 	template <class T>
 	bool Pertenece(const T& dato, Iterador<T> iterador, T& encontrado) const;	
 
@@ -57,5 +59,6 @@ private:
 	void PruebaColaPrioridadExtendida();
 
 	void ProbarComparadorArrays();
+	void ProbarMovimientos1();
 };
 

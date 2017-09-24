@@ -3,6 +3,7 @@
 
 #include "Tablero.h"
 #include "Utils.h"
+#include <string>
 
 Tablero::Tablero(Matriz<int> bloques, Puntero<Prioridad> p)
 {
@@ -62,6 +63,7 @@ Tupla<nat, nat> Tablero::PosicionVacio() const
 			{
 				x = i;
 				y = j;
+				salir = true;
 			}
 		}
 	}
@@ -70,7 +72,7 @@ Tupla<nat, nat> Tablero::PosicionVacio() const
 
 bool Tablero::EstaEnRango(Tupla<nat,nat> pos)
 {
-	return pos.Dato1 > 0 && pos.Dato1 < tablero.Largo && pos.Dato2 > 0 && pos.Dato2 < tablero.Largo;
+	return pos.Dato1 >= 0 && pos.Dato1 < tablero.Largo && pos.Dato2 >= 0 && pos.Dato2 < tablero.Largo;
 }
 
 Array<Tupla<nat,nat>> Tablero::FiltrarVecinosEnRango(Array<Tupla<nat,nat>> vecinos)
@@ -107,7 +109,7 @@ Array<Tablero> Tablero::CrearListaDeTableros(Array<Tupla<nat,nat>> jugadasPosibl
 
 	for (nat i =0 ; i < jugadasPosibles.Largo;i++)
 	{
-		Matriz<int> copia(tablero);
+		Matriz<int> copia = Copiar();
 		//Swap vacio con jugada
 		copia[posVacio.Dato1][posVacio.Dato2] = copia[jugadasPosibles[i].Dato1][jugadasPosibles[i].Dato2];
 		copia[jugadasPosibles[i].Dato1][jugadasPosibles[i].Dato2] = 0;
@@ -128,7 +130,7 @@ Iterador<Tablero> Tablero::Vecinos()
 	vecinos[0] = Tupla<nat, nat>(posVacio.Dato1, posVacio.Dato2 - 1);
 	vecinos[1] = Tupla<nat, nat>(posVacio.Dato1 - 1, posVacio.Dato2);
 	vecinos[2] = Tupla<nat, nat>(posVacio.Dato1 + 1, posVacio.Dato2);
-	vecinos[3] = Tupla<nat, nat>(posVacio.Dato1, posVacio.Dato2 - 1);
+	vecinos[3] = Tupla<nat, nat>(posVacio.Dato1, posVacio.Dato2 + 1);
 
 	// filtrar posiciones invalidas en el tablero
 	Array<Tupla<nat, nat>> vecinosFiltrados = FiltrarVecinosEnRango(vecinos);
@@ -145,8 +147,37 @@ Matriz<int> Tablero::ObtenerTablero() const
 
 Cadena Tablero::Imprimir() const
 {
-	// Implementar.
-	return "";
+	nat largo = tablero.Largo;
+	string s = "\n";
+	for (nat i = 0; i < largo ; i++)
+	{
+		for (nat j =1 ; j <= largo ; j++)
+		{
+			s += std::to_string(tablero[i][j-1]);
+			if (j % largo == 0)
+				s += "\n";
+			else
+				s += " ";
+			
+		}
+	}
+	return Cadena(s.c_str());
+}
+
+Matriz<int> Tablero::Copiar() const
+{
+	Matriz<int> m(tablero.Largo);
+
+	for (nat x = 0; x < m.Largo; x++)
+		for (nat y = 0; y < m.Largo; y++)
+			m[x][y] = tablero[x][y];
+
+	return m;
+}
+
+void Tablero::Mover(const nat& mov)
+{
+	cantidadMovimientos += mov;
 }
 
 

@@ -30,10 +30,7 @@ public :
 	// PRE: -
 	// POS: Devuelve la posicion donde esta el vacio
 	Tupla<nat, nat> PosicionVacio() const;
-	bool EstaEnRango(Tupla<nat, nat> pos);
-	Array<Tupla<nat, nat>> FiltrarVecinosEnRango(Array<Tupla<nat, nat>> vecinos);
-	Array<Tablero> CrearListaDeTableros(Array<Tupla<nat, nat>> jugadasPosibles, Tupla<nat, nat> posVacio);
-
+	
 	//Retorna un iterador de las posiciones vecinas a esta. 
 	Iterador<Tablero> Vecinos();
 	
@@ -42,11 +39,19 @@ public :
 
 	//Retorna la representación del tablero como cadena.
 	Cadena Imprimir() const;
+
+	Matriz<int> Copiar() const;
+
+	void Mover(const nat &mov);
 private:
 	//Atributos que considre necesarios para resolver el problema. 
 	Matriz<int> tablero;
 	Puntero<Prioridad> pPrioridad;	
 	nat cantidadMovimientos;
+
+	bool EstaEnRango(Tupla<nat, nat> pos);
+	Array<Tupla<nat, nat>> FiltrarVecinosEnRango(Array<Tupla<nat, nat>> vecinos);
+	Array<Tablero> CrearListaDeTableros(Array<Tupla<nat, nat>> jugadasPosibles, Tupla<nat, nat> posVacio);
 };
 
 #endif
