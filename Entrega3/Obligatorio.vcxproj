@@ -125,6 +125,7 @@
     <ClInclude Include="ListaOrd.h" />
     <ClInclude Include="NodoLista.h" />
     <ClInclude Include="NodoPQueue.h" />
+    <ClInclude Include="NodoTablero.h" />
     <ClInclude Include="Prioridad.h" />
     <ClInclude Include="PrioridadA.h" />
     <ClInclude Include="PrioridadB.h" />

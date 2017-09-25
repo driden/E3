@@ -114,7 +114,7 @@ Array<Tablero> Tablero::CrearListaDeTableros(Array<Tupla<nat,nat>> jugadasPosibl
 		copia[posVacio.Dato1][posVacio.Dato2] = copia[jugadasPosibles[i].Dato1][jugadasPosibles[i].Dato2];
 		copia[jugadasPosibles[i].Dato1][jugadasPosibles[i].Dato2] = 0;
 
-		tableros[i] = Tablero( copia,pPrioridad,cantidadMovimientos);
+		tableros[i] = Tablero( copia,pPrioridad, cantidadMovimientos+1);
 	}
 
 	return tableros;

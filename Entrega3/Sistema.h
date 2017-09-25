@@ -33,7 +33,7 @@ public:
 
 private:
 	//Atributos necesarios para cumplir con las operaciones.
-	Tablero tablero;
+	Tablero tablero,tableroFinal;
 	Puntero<Prioridad> pPrioridad;
 };
 

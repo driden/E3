@@ -1,4 +1,5 @@
 ﻿#include "CadenaFuncionHash.h"
+#include "NodoTablero.h"
 #ifndef SOLUCION_CPP
 #define SOLUCION_CPP
 
@@ -11,6 +12,17 @@ Sistema::Sistema()
 void Sistema::EstablecerTableroInicial(Tablero inicial)
 {
 	tablero = inicial;
+	Matriz<int> t(inicial.ObtenerTablero().Largo*inicial.ObtenerTablero().Largo);
+	nat contador = 1;
+	for (nat x = 0; x < t.Largo; x++)
+	{
+		for (nat y = 0 ; y < t.Largo ; y++)
+		{
+			t[x][y] = contador++;
+		}
+	}
+	t[t.Largo - 1][t.Ancho - 1] = 0;
+	tableroFinal = Tablero(t, nullptr, 0);
 }
 
 bool Sistema::TieneSolucion()
@@ -27,37 +39,36 @@ int Sistema::Movimientos()
 
 Iterador<Tablero> Sistema::Solucionar()
 {
-	Puntero<ColaPrioridadExtendida<Tablero, nat>> pQueue = new CPBinaryHeap<Tablero,nat>(Comparador<Tablero>::Default, Comparador<nat>::Default,nullptr);
+	Puntero<ColaPrioridadExtendida<Puntero<NodoTablero>, nat>> pQueue = new CPBinaryHeap<Puntero<NodoTablero>,nat>(Comparador<Puntero<NodoTablero>>::Default, Comparador<nat>::Default,nullptr);
 	
-	nat menorPrioridad = tablero.CalcularPrioridad();
-	
-	pQueue->InsertarConPrioridad(tablero, menorPrioridad);
-	Tablero menor;
+	//Esto puede fallar por el fwk
+	Puntero<NodoTablero> estadoTablero = new NodoTablero(tablero);
 		
-	Array<Tablero> movimientos(15);
-	nat i = 0;
+	// El tablero tiene que saber quien fue el anterior.
+	pQueue->InsertarConPrioridad(estadoTablero, tablero.CalcularPrioridad());
+
 	while (!pQueue->EstaVacia())
 	{
-		Tablero actual = pQueue->ObtenerElementoMayorPrioridad();
+		Puntero<NodoTablero> actual = pQueue->ObtenerElementoMayorPrioridad();
 		pQueue->EliminarElementoMayorPrioridad();
 
-		Iterador<Tablero> vecinos = tablero.Vecinos();
+		Iterador<Tablero> vecinos = actual->tablero.Vecinos();
 
-		foreach(Tablero vecino,vecinos)
+		foreach(Tablero vecino, vecinos)
 		{
-			if (menorPrioridad > vecino.CalcularPrioridad() + vecino.ObtenerCantidadDeMovimientos())
+			Puntero<NodoTablero> nodo = new NodoTablero(vecino);
+			nodo->padre = actual;
+			
+			if (!(nodo->tablero == nodo->padre->tablero))
 			{
-				menorPrioridad = vecino.CalcularPrioridad() + vecino.ObtenerCantidadDeMovimientos();
-				menor = vecino;
+				nat prioridadvecino = vecino.CalcularPrioridad() + vecino.ObtenerCantidadDeMovimientos();
+				pQueue->InsertarConPrioridad(nodo, prioridadvecino);
 			}
-		}
-		menor.Mover(1);
-		movimientos[i++] = menor;
-		pQueue->InsertarConPrioridad(menor, menorPrioridad);
+		}		
 	}
 	
-	
-	return movimientos.ObtenerIterador();
+	return Iterador<Tablero>();
+
 }
 
 
