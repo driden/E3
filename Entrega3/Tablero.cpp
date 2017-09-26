@@ -31,24 +31,37 @@ bool Tablero::operator==(const Tablero& t) const
 {
 	Matriz<int> otroTablero = t.ObtenerTablero();
 
-	Iterador<Array<int>> iterOtroTablero = otroTablero.ObtenerIterador();
-	Iterador<Array<int>> iterTablero = tablero.ObtenerIterador();
-	Utils utils = Utils();
-	bool iguales = true;
-	while (iterTablero.HayElemento())
+	bool sonIguales = otroTablero.Largo == tablero.Largo && otroTablero.Ancho == tablero.Ancho;
+
+	if (!sonIguales) return false;
+
+	for (nat fila = 0; fila < tablero.Largo; fila++)
 	{
-		while (iterOtroTablero.HayElemento())
+		for (nat columna = 0; columna < tablero.Ancho; columna++)
 		{
-			iguales &= utils.CompararArrays(iterTablero.ElementoActual(), iterOtroTablero.ElementoActual());
-			iterOtroTablero.Avanzar();
+			if (otroTablero[fila][columna] != tablero[fila][columna])
+				return false;
 		}
-		iterTablero.Avanzar();
 	}
-	if (iguales)
-	{
-		iguales = !(iterTablero.HayElemento() || iterOtroTablero.HayElemento());
-	}
-	return iguales;
+	return true;
+	//Iterador<Array<int>> iterOtroTablero = otroTablero.ObtenerIterador();
+	//Iterador<Array<int>> iterTablero = tablero.ObtenerIterador();
+	//Utils utils = Utils();
+	//bool iguales = true;
+	//while (iterTablero.HayElemento())
+	//{
+	//	while (iterOtroTablero.HayElemento())
+	//	{
+	//		iguales &= utils.CompararArrays(iterTablero.ElementoActual(), iterOtroTablero.ElementoActual());
+	//		iterOtroTablero.Avanzar();
+	//	}
+	//	iterTablero.Avanzar();
+	//}
+	//if (iguales)
+	//{
+	//	iguales = !(iterTablero.HayElemento() || iterOtroTablero.HayElemento());
+	//}
+	//return iguales;
 }
 
 Tupla<nat, nat> Tablero::PosicionVacio() const
