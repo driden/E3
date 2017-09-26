@@ -16,6 +16,9 @@
     <Filter Include="Implementacion\Utils">
       <UniqueIdentifier>{217e20ed-5d2f-40f0-b3ba-43255bb41b14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Implementacion\Estado del juego">
+      <UniqueIdentifier>{d9c573ac-32a9-45f5-96eb-5fca31ae23a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,6 +65,12 @@
     </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>Implementacion\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoTablero.cpp">
+      <Filter>Implementacion\Estado del juego</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoTableroIteracion.cpp">
+      <Filter>Implementacion\Estado del juego</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,7 +129,10 @@
       <Filter>Implementacion\Utils</Filter>
     </ClInclude>
     <ClInclude Include="NodoTablero.h">
-      <Filter>Implementacion</Filter>
+      <Filter>Implementacion\Estado del juego</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoTableroIteracion.h">
+      <Filter>Implementacion\Estado del juego</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
