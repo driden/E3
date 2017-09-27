@@ -46,16 +46,16 @@ Iterador<Tablero> Sistema::Solucionar()
 		
 	// El tablero tiene que saber quien fue el anterior.
 	pQueue->InsertarConPrioridad(actual, tablero.CalcularPrioridad());
-
+	bool esSolucion = false;
 	while (!pQueue->EstaVacia())
 	{
-		actual = pQueue->ObtenerElementoMayorPrioridad();
-		if (actual->tablero == tableroFinal) break;
-		
+		actual = pQueue->ObtenerElementoMayorPrioridad();		
 		pQueue->EliminarElementoMayorPrioridad();
 
-		Iterador<Tablero> vecinos = actual->tablero.Vecinos();
+		esSolucion = actual->tablero == tableroFinal;		
+		if (esSolucion) break;
 
+		Iterador<Tablero> vecinos = actual->tablero.Vecinos();
 		foreach(Tablero vecino, vecinos)
 		{
 			Puntero<NodoTablero> nodo = new NodoTablero(vecino);
@@ -63,10 +63,16 @@ Iterador<Tablero> Sistema::Solucionar()
 			
 			if (!(nodo->tablero == nodo->padre->tablero))
 			{
-				nat prioridadvecino = vecino.CalcularPrioridad() + vecino.ObtenerCantidadDeMovimientos();
+				nat prioridadvecino = vecino.CalcularPrioridad() + actual->tablero.ObtenerCantidadDeMovimientos();
 				pQueue->InsertarConPrioridad(nodo, prioridadvecino);
 			}
 		}		
+	}
+	Iterador<Tablero> jugadas = actual->ObtenerIterador();
+
+	foreach(Tablero t, jugadas)
+	{
+		std::cout << t.Imprimir() << "--> ";
 	}
 	return actual->ObtenerIterador();
 }

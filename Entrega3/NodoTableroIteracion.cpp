@@ -19,6 +19,12 @@ NodoTableroIteracion<Tablero>::NodoTableroIteracion(const Puntero<NodoTablero>& 
 	actual = inicio;
 }
 
+template <class T>
+NodoTableroIteracion<T>::NodoTableroIteracion(const NodoTablero* nodo)
+{
+	inicio = Reverse(nodo);
+	actual = inicio;
+}
 
 
 bool NodoTableroIteracion<Tablero>::HayElemento() const

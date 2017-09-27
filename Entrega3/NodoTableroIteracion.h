@@ -8,7 +8,7 @@ class NodoTableroIteracion: public Iteracion<T>
 {
 public:
 	NodoTableroIteracion(const Puntero<NodoTablero> &nodo);
-	NodoTableroIteracion(const NodoTablero *nodo){};
+	NodoTableroIteracion(const NodoTablero *nodo);
 	~NodoTableroIteracion(){};
 
 	bool HayElemento() const override;

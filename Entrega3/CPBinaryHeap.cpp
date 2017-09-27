@@ -31,6 +31,17 @@ void CPBinaryHeap<T, P>::InsertarConPrioridad(const T& e, const P& p)
 
 	// Primer paso, va al final
 	heap[++tope] = tupla;
+
+	// Cuidado con el heap, si llega al tamanio maximo, puedo tratar de acceder a tope*2 +1
+
+	if (heap.Largo < tope*2+1)
+	{
+		// Resizing
+		Array<Tupla<T, P>> heapMasLargo(tope * 2 + 1);
+		Array<Tupla<T, P >>::Copiar(heap, heapMasLargo);
+		heap = heapMasLargo;
+	}
+
 	// Flotar tupla y 
 	for (nat hole = tope; hole > 1 && compPrioridades.EsMenor(heap[hole].Dato2, heap[hole / 2].Dato2); hole /= 2)
 	{

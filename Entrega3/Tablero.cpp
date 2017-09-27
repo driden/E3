@@ -25,7 +25,10 @@ nat Tablero::CalcularPrioridad()
 	return pPrioridad->CalcularPrioridad(*this);
 }
 
-nat Tablero::ObtenerCantidadDeMovimientos() { return cantidadMovimientos; }
+nat Tablero::ObtenerCantidadDeMovimientos()
+{
+	return cantidadMovimientos;
+}
 
 bool Tablero::operator==(const Tablero& t) const
 {
@@ -126,7 +129,7 @@ Array<Tablero> Tablero::CrearListaDeTableros(Array<Tupla<nat,nat>> jugadasPosibl
 		//Swap vacio con jugada
 		copia[posVacio.Dato1][posVacio.Dato2] = copia[jugadasPosibles[i].Dato1][jugadasPosibles[i].Dato2];
 		copia[jugadasPosibles[i].Dato1][jugadasPosibles[i].Dato2] = 0;
-
+		
 		tableros[i] = Tablero( copia,pPrioridad, cantidadMovimientos+1);
 	}
 
@@ -161,13 +164,14 @@ Matriz<int> Tablero::ObtenerTablero() const
 Cadena Tablero::Imprimir() const
 {
 	nat largo = tablero.Largo;
-	string s = "\n";
+	string s = "";
+	//string s = "\n";
 	for (nat i = 0; i < largo ; i++)
 	{
 		for (nat j =1 ; j <= largo ; j++)
 		{
 			s += std::to_string(tablero[i][j-1]);
-			if (j % largo == 0)
+			if (j % largo == 0 && i < largo -1)
 				s += "\n";
 			else
 				s += " ";
