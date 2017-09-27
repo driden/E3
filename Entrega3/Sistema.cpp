@@ -68,6 +68,7 @@ Iterador<Tablero> Sistema::Solucionar()
 			}
 		}		
 	}
+	return actual->ObtenerIterador();
 }
 
 

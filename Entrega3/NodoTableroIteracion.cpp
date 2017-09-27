@@ -13,17 +13,12 @@ Puntero<NodoTablero> Reverse (const Puntero<NodoTablero>& lista)
 	return nullptr;
 }
 
-NodoTableroIteracion<Tablero>::NodoTableroIteracion(const NodoTablero& lista)
+NodoTableroIteracion<Tablero>::NodoTableroIteracion(const Puntero<NodoTablero>& lista)
 {
 	inicio = Reverse(lista);
 	actual = inicio;
 }
 
-template <class T>
-NodoTableroIteracion<T>::NodoTableroIteracion(const NodoTablero& nodo)
-{
-	
-}
 
 
 bool NodoTableroIteracion<Tablero>::HayElemento() const
@@ -33,12 +28,12 @@ bool NodoTableroIteracion<Tablero>::HayElemento() const
 
 const Tablero& NodoTableroIteracion<Tablero>::ElementoActual() const
 {
-	return actual.tablero;
+	return actual->tablero;
 }
 
 void NodoTableroIteracion<Tablero>::Avanzar()
 {
-	actual = *(actual.padre;
+	actual = actual->padre;
 }
 
 void NodoTableroIteracion<Tablero>::Reiniciar()

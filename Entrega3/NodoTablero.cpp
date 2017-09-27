@@ -6,7 +6,8 @@
 
 Iterador<Tablero> NodoTablero::ObtenerIterador() const
 {
-	return new NodoTableroIteracion<Tablero>(*this);
+	Iterador<Tablero> it = new NodoTableroIteracion<Tablero>(this);
+	return it;
 }
 
 
