@@ -7,8 +7,7 @@ template <class T = Tablero>
 class NodoTableroIteracion: public Iteracion<T>
 {
 public:
-	NodoTableroIteracion(const Puntero<NodoTablero> &nodo);
-	NodoTableroIteracion(const NodoTablero *nodo);
+	NodoTableroIteracion(const NodoTablero &nodo);
 	~NodoTableroIteracion(){};
 
 	bool HayElemento() const override;
@@ -17,7 +16,8 @@ public:
 	void Reiniciar() override;
 
 private:
-	Puntero<NodoTablero> inicio, actual, alreves;
-
+	NodoTablero inicio, actual;
+	nat largo;
+	int tope;	
 };
 
