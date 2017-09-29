@@ -3,21 +3,21 @@
 #include "Tablero.h"
 #include "NodoTablero.h"
 
-template <class T = Tablero>
-class NodoTableroIteracion: public Iteracion<T>
+class NodoTableroIteracion: public Iteracion<NodoTablero>
 {
 public:
-	NodoTableroIteracion(const NodoTablero &nodo);
-	~NodoTableroIteracion(){};
+	NodoTableroIteracion( Puntero<NodoTablero> nodo);
+	~NodoTableroIteracion(){}
 
 	bool HayElemento() const override;
-	const T& ElementoActual() const override;
+	const NodoTablero& ElementoActual() const override;
 	void Avanzar() override;
 	void Reiniciar() override;
 
-private:
-	NodoTablero inicio, actual;
+private:	
+	Puntero<NodoTablero> inicio;
 	nat largo;
-	int tope;	
+	nat tope;	
+	
 };
 

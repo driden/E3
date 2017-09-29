@@ -19,6 +19,13 @@ Tablero::Tablero(Matriz<int> bloques, Puntero<Prioridad> p, nat cantidadDeMovimi
 	cantidadMovimientos = cantidadDeMovimientos;
 }
 
+Tablero::Tablero(const Tablero& t)
+{
+	tablero = t.tablero;
+	pPrioridad = t.pPrioridad;
+	cantidadMovimientos = t.cantidadMovimientos;
+}
+
 nat Tablero::CalcularPrioridad()
 {
 	// Implementar a partir de la prioridad recibida en el constructor.

@@ -17,6 +17,8 @@ public :
 	Tablero(Matriz<int> bloques, Puntero<Prioridad> p);
 
 	Tablero(Matriz<int> bloques, Puntero<Prioridad> p, nat cantidadDeMovimientos);
+
+	Tablero(const Tablero &t);
 	
 	//Retorna el calculo de prioridad en base a la prioridad recibida en el constructor.
 	nat CalcularPrioridad();

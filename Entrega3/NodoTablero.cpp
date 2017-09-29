@@ -4,20 +4,19 @@
 #include "NodoTablero.h"
 #include "NodoTableroIteracion.h"
 
-const Tablero& NodoTablero::ElementAt(nat index)
+const NodoTablero& NodoTablero::ElementAt(nat index) const
 {
-	assert(index < largo);
-	it = padre;
+	assert(static_cast<int>(index) < largo);
+	Puntero<NodoTablero> itt = padre;
 	nat contador = 0;
-	while (this->it != nullptr  && contador++!= index)
+	while (itt != nullptr  && contador++!= index)
 	{
-		it = it->padre;
+		itt = itt->padre;
 		
 	}
-	return it->tablero;
+	return itt;
 }
-
-const nat NodoTablero::Largo() 
+ nat NodoTablero::Largo()
 {
 	if (largo == -1)
 	{
@@ -31,11 +30,13 @@ const nat NodoTablero::Largo()
 	return largo;
 }
 
-void NodoTablero::Revert()
-{
-	it = padre;
-	padre = RevertAux(it);
-}
+//void NodoTablero::Revert()
+//{
+//	reverse = padre;
+//	it = padre;
+//	reverse = RevertAux(it);
+//	revert = true;
+//}
 
 Puntero<NodoTablero> NodoTablero::RevertAux(Puntero<NodoTablero> lista)
 {
@@ -45,9 +46,10 @@ Puntero<NodoTablero> NodoTablero::RevertAux(Puntero<NodoTablero> lista)
 }
 
 
-Iterador<Tablero> NodoTablero::ObtenerIterador() const
+Iterador<NodoTablero> NodoTablero::ObtenerIterador() const
 {
-	return new NodoTableroIteracion<Tablero>(*this);	
+	Iteracion<NodoTablero>* it = new NodoTableroIteracion(this->reverse);
+	return Puntero<Iteracion<NodoTablero>>(it);
 }
 
 

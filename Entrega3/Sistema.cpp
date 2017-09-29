@@ -68,13 +68,29 @@ Iterador<Tablero> Sistema::Solucionar()
 			}
 		}		
 	}
-	Iterador<Tablero> jugadas = actual->ObtenerIterador();
+	Iterador<NodoTablero> jugadas = actual->ObtenerIterador();
 
-	foreach(Tablero t, jugadas)
+	nat largo = 0;
+
+	while(jugadas.HayElemento())
 	{
-		std::cout << t.Imprimir() << "--> ";
+		largo++;
+		jugadas.Avanzar();
 	}
-	return actual->ObtenerIterador();
+	jugadas.Reiniciar();
+
+	Array<Tablero> arrT(largo);
+
+	nat pos = largo-1;
+
+	while(jugadas.HayElemento())
+	{
+		arrT[pos] = jugadas.ElementoActual().tablero;
+		jugadas.Avanzar();
+		pos--;
+	}
+
+	return arrT.ObtenerIterador();
 }
 
 
