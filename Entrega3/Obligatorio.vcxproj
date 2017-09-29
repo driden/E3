@@ -103,10 +103,10 @@
     <ClCompile Include="CPBinaryHeap.cpp" />
     <ClCompile Include="ListaEncadenadaImp.cpp" />
     <ClCompile Include="ListaEncadenadaIteracion.cpp" />
+    <ClCompile Include="Lista.cpp" />
+    <ClCompile Include="ListaIteracion.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NodoPQueue.cpp" />
-    <ClCompile Include="NodoTablero.cpp" />
-    <ClCompile Include="NodoTableroIteracion.cpp" />
     <ClCompile Include="PrioridadA.cpp" />
     <ClCompile Include="PrioridadB.cpp" />
     <ClCompile Include="Sistema.cpp" />
@@ -124,11 +124,11 @@
     <ClInclude Include="CPBinaryHeap.h" />
     <ClInclude Include="ListaEncadenadaImp.h" />
     <ClInclude Include="ListaEncadenadaIteracion.h" />
+    <ClInclude Include="ListaIteracion.h" />
     <ClInclude Include="ListaOrd.h" />
+    <ClInclude Include="Lista.h" />
     <ClInclude Include="NodoLista.h" />
     <ClInclude Include="NodoPQueue.h" />
-    <ClInclude Include="NodoTablero.h" />
-    <ClInclude Include="NodoTableroIteracion.h" />
     <ClInclude Include="Prioridad.h" />
     <ClInclude Include="PrioridadA.h" />
     <ClInclude Include="PrioridadB.h" />

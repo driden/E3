@@ -66,10 +66,10 @@
     <ClCompile Include="Utils.cpp">
       <Filter>Implementacion\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="NodoTablero.cpp">
+    <ClCompile Include="Lista.cpp">
       <Filter>Implementacion\Estado del juego</Filter>
     </ClCompile>
-    <ClCompile Include="NodoTableroIteracion.cpp">
+    <ClCompile Include="ListaIteracion.cpp">
       <Filter>Implementacion\Estado del juego</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,16 +122,16 @@
     <ClInclude Include="ListaOrd.h">
       <Filter>ColaPrioridad_Vieja</Filter>
     </ClInclude>
-    <ClInclude Include="NodoLista.h">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Implementacion\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="NodoTablero.h">
+    <ClInclude Include="NodoLista.h">
       <Filter>Implementacion\Estado del juego</Filter>
     </ClInclude>
-    <ClInclude Include="NodoTableroIteracion.h">
+    <ClInclude Include="Lista.h">
+      <Filter>Implementacion\Estado del juego</Filter>
+    </ClInclude>
+    <ClInclude Include="ListaIteracion.h">
       <Filter>Implementacion\Estado del juego</Filter>
     </ClInclude>
   </ItemGroup>

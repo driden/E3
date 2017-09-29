@@ -1,9 +1,11 @@
-﻿#include "CadenaFuncionHash.h"
-#include "NodoTablero.h"
-#ifndef SOLUCION_CPP
+﻿#ifndef SOLUCION_CPP
 #define SOLUCION_CPP
 
 #include "Sistema.h"
+#include "CadenaFuncionHash.h"
+#include "NodoLista.h"
+#include "Lista.h"
+
 
 Sistema::Sistema()
 {
@@ -39,58 +41,37 @@ int Sistema::Movimientos()
 
 Iterador<Tablero> Sistema::Solucionar()
 {
-	Puntero<ColaPrioridadExtendida<Puntero<NodoTablero>, nat>> pQueue = new CPBinaryHeap<Puntero<NodoTablero>,nat>(Comparador<Puntero<NodoTablero>>::Default, Comparador<nat>::Default,nullptr);
-	
-	//Esto puede fallar por el fwk
-	Puntero<NodoTablero> actual = new NodoTablero(tablero);
-		
+	Puntero<ColaPrioridadExtendida<Puntero<Lista<Tablero>>, nat>> pQueue = new CPBinaryHeap<Puntero<Lista<Tablero>>,nat>(Comparador<Puntero<Lista<Tablero>>>::Default, Comparador<nat>::Default,nullptr);
+	Puntero<Lista<Tablero>> lista = new Lista<Tablero>();
+	lista->Insertar(tablero);
+
 	// El tablero tiene que saber quien fue el anterior.
-	pQueue->InsertarConPrioridad(actual, tablero.CalcularPrioridad());
+	pQueue->InsertarConPrioridad(lista, tablero.CalcularPrioridad());
 	bool esSolucion = false;
 	while (!pQueue->EstaVacia())
 	{
-		actual = pQueue->ObtenerElementoMayorPrioridad();		
+		lista = pQueue->ObtenerElementoMayorPrioridad();
 		pQueue->EliminarElementoMayorPrioridad();
 
-		esSolucion = actual->tablero == tableroFinal;		
+		esSolucion = lista->Ultimo() == tableroFinal;
 		if (esSolucion) break;
 
-		Iterador<Tablero> vecinos = actual->tablero.Vecinos();
+		Tablero actual = lista->Ultimo();
+		Iterador<Tablero> vecinos = actual.Vecinos();
 		foreach(Tablero vecino, vecinos)
-		{
-			Puntero<NodoTablero> nodo = new NodoTablero(vecino);
-			nodo->padre = actual;
-			
-			if (!(nodo->tablero == nodo->padre->tablero))
+		{			
+			lista->Insertar(vecino);
+			Tablero ultimo = lista->Ultimo();
+			if (!( ultimo == actual))
 			{
-				nat prioridadvecino = vecino.CalcularPrioridad() + actual->tablero.ObtenerCantidadDeMovimientos();
-				pQueue->InsertarConPrioridad(nodo, prioridadvecino);
+				nat prioridadvecino = vecino.CalcularPrioridad() + ultimo.ObtenerCantidadDeMovimientos();
+				pQueue->InsertarConPrioridad(lista, prioridadvecino);
 			}
 		}		
 	}
-	Iterador<NodoTablero> jugadas = actual->ObtenerIterador();
 
-	nat largo = 0;
 
-	while(jugadas.HayElemento())
-	{
-		largo++;
-		jugadas.Avanzar();
-	}
-	jugadas.Reiniciar();
-
-	Array<Tablero> arrT(largo);
-
-	nat pos = largo-1;
-
-	while(jugadas.HayElemento())
-	{
-		arrT[pos] = jugadas.ElementoActual().tablero;
-		jugadas.Avanzar();
-		pos--;
-	}
-
-	return arrT.ObtenerIterador();
+	return lista->ObtenerIterador();
 }
 
 
