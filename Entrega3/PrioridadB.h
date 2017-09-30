@@ -8,10 +8,12 @@ typedef unsigned int nat;
 
 class PrioridadB : public Prioridad {
 public:
-	PrioridadB() {};
-
+	PrioridadB() {}
 	//Retorna la suma de distancias de los bloques a su posicion final. 
-	nat CalcularPrioridad(const Tablero& t) const;
+	nat CalcularPrioridad(const Tablero& t) const override;
+
+private:
+	nat CalcularMovimientos(nat filaActual, nat columnaActual, nat filaEsperada, nat columnaEsperada) const;
 };
 
 #endif
