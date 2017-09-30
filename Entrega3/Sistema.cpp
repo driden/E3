@@ -3,9 +3,6 @@
 
 #include "Sistema.h"
 #include "CadenaFuncionHash.h"
-#include "NodoLista.h"
-#include "Lista.h"
-
 
 Sistema::Sistema()
 {
@@ -25,52 +22,117 @@ void Sistema::EstablecerTableroInicial(Tablero inicial)
 	}
 	t[t.Largo - 1][t.Ancho - 1] = 0;
 	tableroFinal = Tablero(t, nullptr, 0);
+
+	if (TieneSolucion()) 
+	{
+		pQueue = new CPBinaryHeap<Puntero<Lista<Tablero>>, nat>(Comparador<Puntero<Lista<Tablero>>>::Default, Comparador<nat>::Default, nullptr);
+		lista = new Lista<Tablero>();
+		lista->Insertar(tablero);
+
+		// El tablero tiene que saber quien fue el anterior.
+		pQueue->InsertarConPrioridad(lista, tablero.CalcularPrioridad());
+		bool esSolucion = false;
+		while (!pQueue->EstaVacia())
+		{
+			lista = pQueue->ObtenerElementoMayorPrioridad();
+			pQueue->EliminarElementoMayorPrioridad();
+
+			esSolucion = lista->Ultimo() == tableroFinal;
+			if (esSolucion) 
+				break;
+
+			Tablero actual = lista->Ultimo();
+			Iterador<Tablero> vecinos = actual.Vecinos();
+			foreach(Tablero vecino, vecinos)
+			{
+				Puntero<Lista<Tablero>> lt = new Lista<Tablero>(lista);
+				lt->Insertar(vecino);
+				
+				Tablero ultimo = lt->Ultimo();
+				if (!(ultimo == actual))
+				{
+					nat prioridadvecino = vecino.CalcularPrioridad() + ultimo.ObtenerCantidadDeMovimientos();
+					pQueue->InsertarConPrioridad(lt, prioridadvecino);
+				}
+			}
+		}
+	}
+}
+
+int CantidadInversionesDeUnNumero(Matriz<int> t, int num) {
+	int contador = 1;
+	int inversiones = 0;
+	const int largo = t.Largo;
+	
+	for (int i = 0; i < largo; i++) {
+		for (int j = 0; j < largo; j++) {
+			if (t[i][j] < num && t[i][j] != 0) {
+				inversiones++;
+			}
+			contador++;
+		}
+	}
+	return inversiones;
+}
+
+int CantidadInversionesTotal(Matriz<int> t) {
+	int inversionesTotales = 0;
+
+	const int largo = t.Largo;
+	
+	for (int i = 0; i < largo; i++) {
+		for (int j = 0; j < largo; j++) {
+			inversionesTotales += CantidadInversionesDeUnNumero(t, t[i][j]);
+		}
+	}
+	return inversionesTotales;
+}
+
+bool BlancoEnFilaImpar(Matriz<int> m)
+{
+	bool blankOdd= false;
+
+	nat largo = m.Largo;
+
+	for(nat fila = largo -1 ; fila >= 0 ; fila--)
+	{
+		for (nat col = 0; col < largo;col++)
+		{
+			//Si es 0
+			if(!m[fila][col])
+			{
+				nat fromBottom = largo - fila;
+				if (fromBottom % 2 == 0)
+					return true;
+				
+				return false;
+			}
+		}
+	}
+
+	return blankOdd;
+
 }
 
 bool Sistema::TieneSolucion()
 {
-	//Implementar.
-	return false;
+	Matriz<int> t = tablero.ObtenerTablero();
+	nat ancho = t.Ancho;
+
+	bool tieneSolucion = ancho % 2 != 0 && (CantidadInversionesTotal(t) % 2 == 0);
+	tieneSolucion |= ((ancho % 2 == 0) && (BlancoEnFilaImpar(t) == (CantidadInversionesTotal(t) % 2 == 0)));
+
+	return tieneSolucion;
 }
 	
 int Sistema::Movimientos()
 {
-	//Implemetar.
-	return tablero.ObtenerCantidadDeMovimientos();
+	Tablero t = lista->Ultimo();
+	return t.ObtenerCantidadDeMovimientos();
 }
 
 Iterador<Tablero> Sistema::Solucionar()
 {
-	Puntero<ColaPrioridadExtendida<Puntero<Lista<Tablero>>, nat>> pQueue = new CPBinaryHeap<Puntero<Lista<Tablero>>,nat>(Comparador<Puntero<Lista<Tablero>>>::Default, Comparador<nat>::Default,nullptr);
-	Puntero<Lista<Tablero>> lista = new Lista<Tablero>();
-	lista->Insertar(tablero);
-
-	// El tablero tiene que saber quien fue el anterior.
-	pQueue->InsertarConPrioridad(lista, tablero.CalcularPrioridad());
-	bool esSolucion = false;
-	while (!pQueue->EstaVacia())
-	{
-		lista = pQueue->ObtenerElementoMayorPrioridad();
-		pQueue->EliminarElementoMayorPrioridad();
-
-		esSolucion = lista->Ultimo() == tableroFinal;
-		if (esSolucion) break;
-
-		Tablero actual = lista->Ultimo();
-		Iterador<Tablero> vecinos = actual.Vecinos();
-		foreach(Tablero vecino, vecinos)
-		{			
-			lista->Insertar(vecino);
-			Tablero ultimo = lista->Ultimo();
-			if (!( ultimo == actual))
-			{
-				nat prioridadvecino = vecino.CalcularPrioridad() + ultimo.ObtenerCantidadDeMovimientos();
-				pQueue->InsertarConPrioridad(lista, prioridadvecino);
-			}
-		}		
-	}
-
-
 	return lista->ObtenerIterador();
 }
 

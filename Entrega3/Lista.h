@@ -14,8 +14,12 @@ public:
 	const T& Obtener(const nat n) const;
 
 	const T& Ultimo() const;
+	const T& Ultimo();
+
+	void Append(Puntero<Lista<T>> listaAppend);
 	
 	Lista();
+	Lista(Puntero<Lista<T>> listaAppend);
 	~Lista(){}
 
 private:

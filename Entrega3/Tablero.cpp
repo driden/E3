@@ -54,24 +54,6 @@ bool Tablero::operator==(const Tablero& t) const
 		}
 	}
 	return true;
-	//Iterador<Array<int>> iterOtroTablero = otroTablero.ObtenerIterador();
-	//Iterador<Array<int>> iterTablero = tablero.ObtenerIterador();
-	//Utils utils = Utils();
-	//bool iguales = true;
-	//while (iterTablero.HayElemento())
-	//{
-	//	while (iterOtroTablero.HayElemento())
-	//	{
-	//		iguales &= utils.CompararArrays(iterTablero.ElementoActual(), iterOtroTablero.ElementoActual());
-	//		iterOtroTablero.Avanzar();
-	//	}
-	//	iterTablero.Avanzar();
-	//}
-	//if (iguales)
-	//{
-	//	iguales = !(iterTablero.HayElemento() || iterOtroTablero.HayElemento());
-	//}
-	//return iguales;
 }
 
 Tupla<nat, nat> Tablero::PosicionVacio() const

@@ -9,6 +9,7 @@
 #include "Tupla.h"
 #include "ColaPrioridadExtendida.h"
 #include "FuncionHash.h"
+#include "Lista.h"
 
 class Sistema
 {
@@ -35,6 +36,9 @@ private:
 	//Atributos necesarios para cumplir con las operaciones.
 	Tablero tablero,tableroFinal;
 	Puntero<Prioridad> pPrioridad;
+
+	Puntero<ColaPrioridadExtendida<Puntero<Lista<Tablero>>, nat>> pQueue;
+	Puntero<Lista<Tablero>> lista;
 };
 
 #include "SistemaTemplates.cpp"

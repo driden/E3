@@ -24,17 +24,17 @@ Cadena CasoDePrueba::GetNombre()const
 
 void CasoDePrueba::CorrerPruebaConcreta()
 {
-	IniciarSeccion("Son Iguales Arrays");
+	/*IniciarSeccion("Son Iguales Arrays");
 	ProbarComparadorArrays();
-	CerrarSeccion();
+	CerrarSeccion();*/
 	
-	//IniciarSeccion("Movimientos");
-	//ProbarMovimientos1();
-	//CerrarSeccion();
+	IniciarSeccion("Movimientos");
+	ProbarMovimientos1();
+	CerrarSeccion();
 
-	//IniciarSeccion("Cola de Prioridad Extendida");
-	//PruebaColaPrioridadExtendida();
-	//CerrarSeccion();
+	IniciarSeccion("Cola de Prioridad Extendida");
+	PruebaColaPrioridadExtendida();
+	CerrarSeccion();
 
 	Puntero<Prioridad> prioridadA = new PrioridadA();
 	Puntero<Prioridad> prioridadB = new PrioridadB();
