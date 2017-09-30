@@ -59,17 +59,21 @@ void Sistema::EstablecerTableroInicial(Tablero inicial)
 	}
 }
 
-int CantidadInversionesDeUnNumero(Matriz<int> t, int num) {
-	int contador = 1;
+int CantidadInversionesDeUnNumero(Matriz<int> t, int num, int pos) {
+
+	if (num == 0) return 0;
+	
 	int inversiones = 0;
 	const int largo = t.Largo;
 	
-	for (int i = 0; i < largo; i++) {
-		for (int j = 0; j < largo; j++) {
+	int filaDesde = pos / largo;
+	int colDesde = pos % largo;
+
+	for (int i = filaDesde; i < largo; i++) {
+		for (int j = colDesde; j < largo; j++) {
 			if (t[i][j] < num && t[i][j] != 0) {
 				inversiones++;
 			}
-			contador++;
 		}
 	}
 	return inversiones;
@@ -79,10 +83,12 @@ int CantidadInversionesTotal(Matriz<int> t) {
 	int inversionesTotales = 0;
 
 	const int largo = t.Largo;
-	
+	nat contador = 0;
 	for (int i = 0; i < largo; i++) {
-		for (int j = 0; j < largo; j++) {
-			inversionesTotales += CantidadInversionesDeUnNumero(t, t[i][j]);
+		for (int j = 0; j < largo; j++)
+		{
+			inversionesTotales += CantidadInversionesDeUnNumero(t, t[i][j],contador);
+			contador++;
 		}
 	}
 	return inversionesTotales;
@@ -119,8 +125,10 @@ bool Sistema::TieneSolucion()
 	Matriz<int> t = tablero.ObtenerTablero();
 	nat ancho = t.Ancho;
 
-	bool tieneSolucion = ancho % 2 != 0 && (CantidadInversionesTotal(t) % 2 == 0);
-	tieneSolucion |= ((ancho % 2 == 0) && (BlancoEnFilaImpar(t) == (CantidadInversionesTotal(t) % 2 == 0)));
+	nat candidadInversiones = CantidadInversionesTotal(t);
+
+	bool tieneSolucion = ancho % 2 != 0 && (candidadInversiones % 2 == 0);
+	tieneSolucion |= ((ancho % 2 == 0) && (BlancoEnFilaImpar(t) == (candidadInversiones % 2 == 0)));
 
 	return tieneSolucion;
 }

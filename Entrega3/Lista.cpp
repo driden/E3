@@ -29,6 +29,8 @@ void Lista<T>::Insertar(const T& e)
 	{
 		assert(fin->_sig == nullptr);
 		fin = nodo;
+	/*	nodo->_sig = principio;
+		principio = nodo;*/
 	}
 
 	largo++;
