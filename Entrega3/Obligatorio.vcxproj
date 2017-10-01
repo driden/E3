@@ -97,16 +97,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CasoDePrueba.cpp" />
-    <ClCompile Include="ColaIteracion.cpp" />
-    <ClCompile Include="ColaPrioridadLista.cpp" />
-    <ClCompile Include="ComparacionNodoPQueue.cpp" />
     <ClCompile Include="CPBinaryHeap.cpp" />
-    <ClCompile Include="ListaEncadenadaImp.cpp" />
-    <ClCompile Include="ListaEncadenadaIteracion.cpp" />
     <ClCompile Include="Lista.cpp" />
     <ClCompile Include="ListaIteracion.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="NodoPQueue.cpp" />
     <ClCompile Include="PrioridadA.cpp" />
     <ClCompile Include="PrioridadB.cpp" />
     <ClCompile Include="Sistema.cpp" />
@@ -116,19 +110,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CasoDePrueba.h" />
-    <ClInclude Include="ColaIteracion.h" />
-    <ClInclude Include="ColaPrioridad.h" />
     <ClInclude Include="ColaPrioridadExtendida.h" />
-    <ClInclude Include="ColaPrioridadLista.h" />
-    <ClInclude Include="ComparacionNodoPQueue.h" />
     <ClInclude Include="CPBinaryHeap.h" />
-    <ClInclude Include="ListaEncadenadaImp.h" />
-    <ClInclude Include="ListaEncadenadaIteracion.h" />
     <ClInclude Include="ListaIteracion.h" />
-    <ClInclude Include="ListaOrd.h" />
     <ClInclude Include="Lista.h" />
     <ClInclude Include="NodoLista.h" />
-    <ClInclude Include="NodoPQueue.h" />
     <ClInclude Include="Prioridad.h" />
     <ClInclude Include="PrioridadA.h" />
     <ClInclude Include="PrioridadB.h" />

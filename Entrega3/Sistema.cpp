@@ -15,7 +15,7 @@ void Sistema::EstablecerTableroInicial(Tablero inicial)
 	nat contador = 1;
 	for (nat x = 0; x < t.Largo; x++)
 	{
-		for (nat y = 0 ; y < t.Largo ; y++)
+		for (nat y = 0; y < t.Largo; y++)
 		{
 			t[x][y] = contador++;
 		}
@@ -23,14 +23,15 @@ void Sistema::EstablecerTableroInicial(Tablero inicial)
 	t[t.Largo - 1][t.Ancho - 1] = 0;
 	tableroFinal = Tablero(t, nullptr, 0);
 
-	if (TieneSolucion()) 
+	if (TieneSolucion())
 	{
 		pQueue = new CPBinaryHeap<Puntero<Lista<Tablero>>, nat>(Comparador<Puntero<Lista<Tablero>>>::Default, Comparador<nat>::Default, nullptr);
 		lista = new Lista<Tablero>();
 		lista->Insertar(tablero);
 
 		// El tablero tiene que saber quien fue el anterior.
-		pQueue->InsertarConPrioridad(lista, tablero.CalcularPrioridad());
+		nat prioridadInicial = tablero.CalcularPrioridad();
+		pQueue->InsertarConPrioridad(lista, prioridadInicial);
 		bool esSolucion = false;
 		while (!pQueue->EstaVacia())
 		{
@@ -38,7 +39,7 @@ void Sistema::EstablecerTableroInicial(Tablero inicial)
 			pQueue->EliminarElementoMayorPrioridad();
 
 			esSolucion = lista->Ultimo() == tableroFinal;
-			if (esSolucion) 
+			if (esSolucion)
 				break;
 
 			Tablero actual = lista->Ultimo();
@@ -47,11 +48,13 @@ void Sistema::EstablecerTableroInicial(Tablero inicial)
 			{
 				Puntero<Lista<Tablero>> lt = new Lista<Tablero>(lista);
 				lt->Insertar(vecino);
-				
+
 				Tablero ultimo = lt->Ultimo();
 				if (!(ultimo == actual))
 				{
-					nat prioridadvecino = vecino.CalcularPrioridad() + ultimo.ObtenerCantidadDeMovimientos();
+					nat prioridadF = vecino.CalcularPrioridad();
+					nat movs = ultimo.ObtenerCantidadDeMovimientos();
+					nat prioridadvecino = prioridadF  + movs;
 					pQueue->InsertarConPrioridad(lt, prioridadvecino);
 				}
 			}
@@ -59,58 +62,40 @@ void Sistema::EstablecerTableroInicial(Tablero inicial)
 	}
 }
 
-int CantidadInversionesDeUnNumero(Matriz<int> t, int num, int pos) {
+int CantidadInversionesDeUnNumero(Array<int> arr, nat n) {
 
-	if (num == 0) return 0;
-	
-	int inversiones = 0;
-	const int largo = t.Largo;
-	
-	int filaDesde = pos / largo;
-	int colDesde = pos % largo;
+	int inv_count = 0;
+	for (nat i = 0; i < n - 1; i++)
+		for (nat j = i + 1; j < n; j++)
+			if (arr[i] && arr[j] && arr[i] > arr[j])
+				inv_count++;
 
-	for (int i = filaDesde; i < largo; i++) {
-		for (int j = colDesde; j < largo; j++) {
-			if (t[i][j] < num && t[i][j] != 0) {
-				inversiones++;
-			}
-		}
-	}
-	return inversiones;
+	return inv_count;
 }
 
-int CantidadInversionesTotal(Matriz<int> t) {
-	int inversionesTotales = 0;
+int CantidadInversionesTotal(Array<int> arr) {
+	int total = CantidadInversionesDeUnNumero(arr, arr.Largo);
 
-	const int largo = t.Largo;
-	nat contador = 0;
-	for (int i = 0; i < largo; i++) {
-		for (int j = 0; j < largo; j++)
-		{
-			inversionesTotales += CantidadInversionesDeUnNumero(t, t[i][j],contador);
-			contador++;
-		}
-	}
-	return inversionesTotales;
+	return total;
 }
 
 bool BlancoEnFilaImpar(Matriz<int> m)
 {
-	bool blankOdd= false;
+	bool blankOdd = false;
 
 	nat largo = m.Largo;
 
-	for(nat fila = largo -1 ; fila >= 0 ; fila--)
+	for (nat fila = largo - 1; fila >= 0; fila--)
 	{
-		for (nat col = 0; col < largo;col++)
+		for (nat col = 0; col < largo; col++)
 		{
 			//Si es 0
-			if(!m[fila][col])
+			if (!m[fila][col])
 			{
 				nat fromBottom = largo - fila;
 				if (fromBottom % 2 == 0)
 					return true;
-				
+
 				return false;
 			}
 		}
@@ -119,20 +104,41 @@ bool BlancoEnFilaImpar(Matriz<int> m)
 	return blankOdd;
 
 }
+Array<int> AplanarTablero(const Tablero& t)
+{
+	nat largo = t.ObtenerTablero().Largo;
 
+	Array<int>arrayTablero(largo*largo, 0);
+
+	Matriz<int> matriz = t.ObtenerTablero();
+	Iterador<Array<int>> itMatriz = matriz.ObtenerIterador();
+
+	nat desde = 0;
+	while (itMatriz.HayElemento())
+	{
+		Array<int> linea = itMatriz.ElementoActual();
+		itMatriz.Avanzar();
+
+
+		Array<int>::Copiar(linea, arrayTablero, desde);
+		desde += linea.Largo;
+	}
+	return arrayTablero;
+}
 bool Sistema::TieneSolucion()
 {
 	Matriz<int> t = tablero.ObtenerTablero();
 	nat ancho = t.Ancho;
 
-	nat candidadInversiones = CantidadInversionesTotal(t);
+	Array<int> arr = AplanarTablero(tablero);
+	nat candidadInversiones = CantidadInversionesTotal(arr);	
 
 	bool tieneSolucion = ancho % 2 != 0 && (candidadInversiones % 2 == 0);
 	tieneSolucion |= ((ancho % 2 == 0) && (BlancoEnFilaImpar(t) == (candidadInversiones % 2 == 0)));
 
 	return tieneSolucion;
 }
-	
+
 int Sistema::Movimientos()
 {
 	Tablero t = lista->Ultimo();

@@ -45,24 +45,6 @@
     <ClCompile Include="CPBinaryHeap.cpp">
       <Filter>TADs</Filter>
     </ClCompile>
-    <ClCompile Include="ColaPrioridadLista.cpp">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClCompile>
-    <ClCompile Include="ComparacionNodoPQueue.cpp">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClCompile>
-    <ClCompile Include="ListaEncadenadaImp.cpp">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClCompile>
-    <ClCompile Include="ListaEncadenadaIteracion.cpp">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClCompile>
-    <ClCompile Include="NodoPQueue.cpp">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClCompile>
-    <ClCompile Include="ColaIteracion.cpp">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>Implementacion\Utils</Filter>
     </ClCompile>
@@ -97,30 +79,6 @@
     </ClInclude>
     <ClInclude Include="CPBinaryHeap.h">
       <Filter>TADs</Filter>
-    </ClInclude>
-    <ClInclude Include="ColaIteracion.h">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClInclude>
-    <ClInclude Include="ColaPrioridad.h">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClInclude>
-    <ClInclude Include="ColaPrioridadLista.h">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClInclude>
-    <ClInclude Include="ComparacionNodoPQueue.h">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClInclude>
-    <ClInclude Include="ListaEncadenadaImp.h">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClInclude>
-    <ClInclude Include="ListaEncadenadaIteracion.h">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClInclude>
-    <ClInclude Include="NodoPQueue.h">
-      <Filter>ColaPrioridad_Vieja</Filter>
-    </ClInclude>
-    <ClInclude Include="ListaOrd.h">
-      <Filter>ColaPrioridad_Vieja</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Implementacion\Utils</Filter>

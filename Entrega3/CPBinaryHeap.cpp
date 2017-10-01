@@ -10,7 +10,7 @@ CPBinaryHeap<T, P>::CPBinaryHeap(const Comparador<T>& compElementos, const Compa
 	compPrioridades(compPrioridades)
 {
 	this->fHash = fHashElementos;
-	this->heap = Array<Tupla<T, P>>(51);
+	this->heap = Array<Tupla<T, P>>(100000);
 	this->tope = 0;
 	this->utils = Utils();
 	this->copia = Array<Tupla<T, P>>(0);
