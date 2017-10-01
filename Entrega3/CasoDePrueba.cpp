@@ -40,24 +40,23 @@ void CasoDePrueba::CorrerPruebaConcreta()
 	Puntero<Prioridad> prioridadB = new PrioridadB();
 
 	IniciarSeccion("Prioridad A");
-	PruebaTablero1(prioridadA);
-	PruebaTablero2(prioridadA);
-	
+	/*PruebaTablero1(prioridadA);
+	PruebaTablero2(prioridadA);	
 	PruebaTablero3(prioridadA);
-	PruebaTablero4(prioridadA);
+	PruebaTablero4(prioridadA);*/
 	PruebaTablero5(prioridadA);
 	
 	//PruebaTablero6(prioridadA);
-	CerrarSeccion();
+	//CerrarSeccion();
 
 	//IniciarSeccion("Prioridad B");
 	//PruebaTablero1(prioridadB);
-	//PruebaTablero2(prioridadB);
-	//PruebaTablero3(prioridadB);
-	//PruebaTablero4(prioridadB);
-	//PruebaTablero5(prioridadB);
-	//PruebaTablero6(prioridadB);
-	//CerrarSeccion();
+	/*PruebaTablero2(prioridadB);
+	PruebaTablero3(prioridadB);
+	PruebaTablero4(prioridadB);
+	PruebaTablero5(prioridadB);
+	PruebaTablero6(prioridadB);
+	CerrarSeccion();*/
 
 }
 

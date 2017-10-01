@@ -38,18 +38,6 @@ nat PrioridadA::SumarArray(const Array<int> arr) const
 
 nat PrioridadA::CalcularPrioridad(const Tablero& t) const 
 {
-	/*Array<int>arrayPrioridades = AplanarTablero(t);
-
-	for (nat i = 0; i < arrayPrioridades.Largo; i++)
-	{
-		if (arrayPrioridades[i] != i + 1)
-			arrayPrioridades[i] = 1;
-		else
-			arrayPrioridades[i] = 0;
-	}
-
-	return SumarArray(arrayPrioridades);*/
-
 	Matriz<int> m = t.ObtenerTablero();
 	Matriz<int> mCorrecta(m.Largo);
 	nat contador = 1;

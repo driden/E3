@@ -27,9 +27,11 @@ nat PrioridadB::CalcularPrioridad(const Tablero& t) const
 	{
 		for (nat columna = 0; columna < largo; columna++)
 		{
-			nat num = t.ObtenerTablero()[fila][columna];
+			nat obtenido = t.ObtenerTablero()[fila][columna];
+			if (obtenido == 0) continue;
+			nat num = obtenido -1 ;
 			nat filaEsperada = (num / largo) ;
-			nat columnaEsperada =  (num % largo) - 1;
+			nat columnaEsperada = (num % largo);
 
 			nat movs = CalcularMovimientos(fila, columna, filaEsperada, columnaEsperada);
 			movimientosNecesarios += movs;
