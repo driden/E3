@@ -12,29 +12,38 @@ Iterador<T> Lista<T>::ObtenerIterador() const
 	const Puntero<NodoLista<Tablero>> lista = principio;
 
 	Iteracion<T>* it = new  ListaIteracion<T>(lista);
-	return Puntero<Iteracion<T>>(it);
+	Iterador<T> alreves = Puntero<Iteracion<T>>(it);
+
+	nat largo = 0;
+	while (alreves.HayElemento())
+	{
+		largo++;
+		alreves.Avanzar();
+	}
+
+	alreves.Reiniciar();
+
+	Array<T> arr(largo);
+	for (nat i = largo - 1; i > 0; i--)
+	{
+		arr[i] = alreves.ElementoActual();
+		alreves.Avanzar();
+	}
+
+	return arr.ObtenerIterador();
 }
 
 template <class T>
-void Lista<T>::Insertar(const T& e)
+void Lista<T>::Insertar(const T& e, const Puntero<Lista<T>>& padre)
 {
 	Puntero<NodoLista<T>> nodo = new NodoLista<T>{ e, nullptr };
 
-	if (principio == nullptr)
-	{
-		principio = nodo;
-		fin = nodo;
-	}
-	else
-	{
-		assert(fin->_sig == nullptr);
-		fin = nodo;
-	/*	nodo->_sig = principio;
-		principio = nodo;*/
-	}
+	if (padre != nullptr)
+		principio = padre->principio;
+	
+	nodo->_sig = principio;
 
 	largo++;
-	assert(fin->_sig == nullptr);
 }
 template <class T>
 const T& Lista<T>::Obtener(const nat n) const
@@ -53,41 +62,19 @@ const T& Lista<T>::Obtener(const nat n) const
 template <class T>
 const T& Lista<T>::Ultimo() const
 {
-	assert(fin->_sig == nullptr);
-	return fin->_data;
+
+	return principio->_data;
 }
 
-template <class T>
-const T& Lista<T>::Ultimo()
-{
-	assert(fin->_sig == nullptr);
-	return fin->_data;
-}
-
-template <class T>
-void Lista<T>::Append(Puntero<Lista<T>> listaAppend)
-{
-	assert(fin->_sig == nullptr);
-	fin->_sig = listaAppend;
-	fin = listaAppend->fin;
-	largo += listaAppend->largo;
-}
 
 template <class T>
 Lista<T>::Lista()
 {
 	principio = nullptr;
-	fin = principio;
 	largo = 0;
 }
 
-template <class T>
-Lista<T>::Lista(Puntero<Lista<T>> listaAppend)
-{
-	this->principio = listaAppend->principio;
-	this->fin = listaAppend->fin;
-	this->largo = listaAppend->largo;
-}
+
 
 
 

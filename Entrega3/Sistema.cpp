@@ -25,37 +25,37 @@ void Sistema::EstablecerTableroInicial(Tablero inicial)
 
 	if (TieneSolucion())
 	{
-		pQueue = new CPBinaryHeap<Puntero<Lista<Tablero>>, nat>(Comparador<Puntero<Lista<Tablero>>>::Default, Comparador<nat>::Default, nullptr);
-		lista = new Lista<Tablero>();
-		lista->Insertar(tablero);
+		pQueue = new CPBinaryHeap<Puntero<NodoLista<Tablero>>, nat>(Comparador<Puntero<NodoLista<Tablero>>>::Default, Comparador<nat>::Default, nullptr);
+		nodo = new NodoLista<Tablero>{ tablero, nullptr };
 
 		// El tablero tiene que saber quien fue el anterior.
 		nat prioridadInicial = tablero.CalcularPrioridad();
-		pQueue->InsertarConPrioridad(lista, prioridadInicial);
+		pQueue->InsertarConPrioridad(nodo, prioridadInicial);
 		bool esSolucion = false;
+
 		while (!pQueue->EstaVacia())
 		{
-			lista = pQueue->ObtenerElementoMayorPrioridad();
+			nodo = pQueue->ObtenerElementoMayorPrioridad();
 			pQueue->EliminarElementoMayorPrioridad();
 
-			esSolucion = lista->Ultimo() == tableroFinal;
+			esSolucion = nodo->_data == tableroFinal;
 			if (esSolucion)
 				break;
 
-			Tablero actual = lista->Ultimo();
+			Tablero actual = nodo->_data;
 			Iterador<Tablero> vecinos = actual.Vecinos();
 			foreach(Tablero vecino, vecinos)
 			{
-				Puntero<Lista<Tablero>> lt = new Lista<Tablero>(lista);
-				lt->Insertar(vecino);
-
-				Tablero ultimo = lt->Ultimo();
-				if (!(ultimo == actual))
+				if (!(vecino == actual))
 				{
+					Puntero<NodoLista<Tablero>> nodoLista = new NodoLista<Tablero>{ vecino, nullptr };
+					nodoLista->_sig = nodo;
+
 					nat prioridadF = vecino.CalcularPrioridad();
-					nat movs = ultimo.ObtenerCantidadDeMovimientos();
+					nat movs = vecino.ObtenerCantidadDeMovimientos();
 					nat prioridadvecino = prioridadF  + movs;
-					pQueue->InsertarConPrioridad(lt, prioridadvecino);
+					
+					pQueue->InsertarConPrioridad(nodoLista, prioridadvecino);
 				}
 			}
 		}
@@ -141,14 +141,30 @@ bool Sistema::TieneSolucion()
 
 int Sistema::Movimientos()
 {
-	Tablero t = lista->Ultimo();
+	Tablero t = nodo->_data;
 	return t.ObtenerCantidadDeMovimientos();
 }
 
 Iterador<Tablero> Sistema::Solucionar()
 {
-	return lista->ObtenerIterador();
-}
+	Puntero<NodoLista<Tablero>> lista = nodo;
+	nat largo = 0;
+	while (lista != nullptr)
+	{
+		largo++;
+		lista = lista->_sig;
+	}
 
+	lista = nodo;
+
+	Array<Tablero> arr(largo);
+	for (int i = largo - 1; i > -1; i--)
+	{
+		arr[i] = lista->_data;
+		lista = lista->_sig;
+	}
+
+	return arr.ObtenerIterador();
+}
 
 #endif

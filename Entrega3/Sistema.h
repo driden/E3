@@ -37,8 +37,9 @@ private:
 	Tablero tablero,tableroFinal;
 	Puntero<Prioridad> pPrioridad;
 
-	Puntero<ColaPrioridadExtendida<Puntero<Lista<Tablero>>, nat>> pQueue;
-	Puntero<Lista<Tablero>> lista;
+	Puntero<ColaPrioridadExtendida<Puntero<NodoLista<Tablero>>, nat>> pQueue;
+	
+	Puntero<NodoLista<Tablero>> nodo;
 };
 
 #include "SistemaTemplates.cpp"

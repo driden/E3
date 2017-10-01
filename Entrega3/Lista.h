@@ -9,21 +9,17 @@ class Lista : Iterable<T>
 public:
 	Iterador<T> ObtenerIterador() const override;
 
-	void Insertar(const T& e);
+	void Insertar(const T& e, const Puntero<Lista<T>>& padre);
 
 	const T& Obtener(const nat n) const;
 
 	const T& Ultimo() const;
-	const T& Ultimo();
-
-	void Append(Puntero<Lista<T>> listaAppend);
 	
 	Lista();
-	Lista(Puntero<Lista<T>> listaAppend);
 	~Lista(){}
-
+	Puntero<NodoLista<T>> principio;
 private:
-	Puntero<NodoLista<T>> principio, fin;
+	
 	nat largo;
 };
 
