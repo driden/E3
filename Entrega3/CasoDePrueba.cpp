@@ -28,13 +28,13 @@ void CasoDePrueba::CorrerPruebaConcreta()
 	ProbarComparadorArrays();
 	CerrarSeccion();*/
 	
-	IniciarSeccion("Movimientos");
-	ProbarMovimientos1();
-	CerrarSeccion();
+	//IniciarSeccion("Movimientos");
+	//ProbarMovimientos1();
+	//CerrarSeccion();
 
-	IniciarSeccion("Cola de Prioridad Extendida");
-	PruebaColaPrioridadExtendida();
-	CerrarSeccion();
+	//IniciarSeccion("Cola de Prioridad Extendida");
+	//PruebaColaPrioridadExtendida();
+	//CerrarSeccion();
 
 	Puntero<Prioridad> prioridadA = new PrioridadA();
 	Puntero<Prioridad> prioridadB = new PrioridadB();
@@ -44,7 +44,7 @@ void CasoDePrueba::CorrerPruebaConcreta()
 	PruebaTablero2(prioridadA);
 	PruebaTablero3(prioridadA);
 	PruebaTablero4(prioridadA);
-	PruebaTablero5(prioridadA);
+	//PruebaTablero5(prioridadA);
 	PruebaTablero6(prioridadA);
 	CerrarSeccion();
 
