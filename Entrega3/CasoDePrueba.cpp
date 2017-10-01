@@ -28,35 +28,35 @@ void CasoDePrueba::CorrerPruebaConcreta()
 	ProbarComparadorArrays();
 	CerrarSeccion();*/
 	
-	//IniciarSeccion("Movimientos");
-	//ProbarMovimientos1();
-	//CerrarSeccion();
+	IniciarSeccion("Movimientos");
+	ProbarMovimientos1();
+	CerrarSeccion();
 
-	//IniciarSeccion("Cola de Prioridad Extendida");
-	//PruebaColaPrioridadExtendida();
-	//CerrarSeccion();
+	IniciarSeccion("Cola de Prioridad Extendida");
+	PruebaColaPrioridadExtendida();
+	CerrarSeccion();
 
 	Puntero<Prioridad> prioridadA = new PrioridadA();
 	Puntero<Prioridad> prioridadB = new PrioridadB();
 
 	IniciarSeccion("Prioridad A");
-	/*PruebaTablero1(prioridadA);
+	PruebaTablero1(prioridadA);
 	PruebaTablero2(prioridadA);	
 	PruebaTablero3(prioridadA);
-	PruebaTablero4(prioridadA);*/
-	PruebaTablero5(prioridadA);
+	PruebaTablero4(prioridadA);
+	//PruebaTablero5(prioridadA);
 	
-	//PruebaTablero6(prioridadA);
-	//CerrarSeccion();
+	PruebaTablero6(prioridadA);
+	CerrarSeccion();
 
-	//IniciarSeccion("Prioridad B");
-	//PruebaTablero1(prioridadB);
-	/*PruebaTablero2(prioridadB);
+	IniciarSeccion("Prioridad B");
+	PruebaTablero1(prioridadB);
+	PruebaTablero2(prioridadB);
 	PruebaTablero3(prioridadB);
 	PruebaTablero4(prioridadB);
-	PruebaTablero5(prioridadB);
+	//PruebaTablero5(prioridadB);
 	PruebaTablero6(prioridadB);
-	CerrarSeccion();*/
+	CerrarSeccion();
 
 }
 
